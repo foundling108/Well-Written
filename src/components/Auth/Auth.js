@@ -6,7 +6,8 @@ class Auth extends Component {
 
 
     render() {
-        return
+        return(
+
         <div className="Body">
             
             <div className="Header" id="Auth">
@@ -18,6 +19,7 @@ class Auth extends Component {
                 <button>Sign Up</button>
             </div>
         </div>
+        )
     }
 }
 

@@ -6,12 +6,14 @@ class Home extends Component {
 
 
     render() {
-        return
-        <div className="Body">
+        return(
+
+            <div className="Body">
             <div className="Header" id="Home">
                 Home
             </div>
         </div>
+        )
     }
 }
 

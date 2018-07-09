@@ -6,12 +6,14 @@ class Locations extends Component {
 
 
     render() {
-        return
-        <div className="Body">
+        return(
+
+            <div className="Body">
             <div className="Header" id="Locations">
                 Locations
             </div>  
         </div>
+        )
     }
 }
 
