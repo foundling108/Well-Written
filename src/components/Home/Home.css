@@ -31,3 +31,75 @@
     font-size: 1vw;
     color: black;
   }
+
+  .cards {
+    margin-top: 290px;
+  }
+
+  .component-cards {
+    position: relative;
+    margin: 35px auto;
+    top: 25px;
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    height: 50px;
+    width: 70%;
+    border: solid black 5px;
+    border-radius: 25px;
+  }
+
+  .color-card {
+    position: relative;
+    margin: 0 0 0 0;
+    display: grid;
+    flex-direction: row start;
+    height: 50px;
+    width: 20%;
+    border: solid grey 5px;
+    border-radius: 25px;
+  }
+
+  button {
+    
+    border: none;
+    border-radius: 25px;
+    background: whitesmoke;
+    
+  }
+
+  #chapbox {
+    color: rgb(30, 140, 243);
+  }
+
+  #chaptbox {
+    border: solid rgb(30, 140, 243) 5px;
+  }
+
+  #charbox {
+    color: rgb(138, 24, 138);
+  }
+
+  #charabox {
+    border: solid rgb(138, 24, 138) 5px;
+  }
+
+  #progbox {
+    color: rgb(233, 51, 51);
+  }
+
+  #progrbox {
+    border: solid rgb(233, 51, 51) 5px;
+  }
+
+  #locbox {
+    color: rgb(228, 142, 29);
+  }
+
+  #locabox {
+    border: solid rgb(228, 142, 29) 5px;
+  }
+
+  
