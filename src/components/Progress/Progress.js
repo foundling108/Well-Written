@@ -12,6 +12,8 @@ class Progress extends Component {
             <div className="Header" id="Progress">
                 Writing Progress  
             </div>
+
+            <button className='add-button'>+</button>
         </div>
         )
     }

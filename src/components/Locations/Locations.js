@@ -12,6 +12,8 @@ class Locations extends Component {
             <div className="Header" id="Locations">
                 Locations
             </div>  
+
+            <button className='add-button'>+</button>
         </div>
         )
     }

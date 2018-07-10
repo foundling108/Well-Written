@@ -19,6 +19,24 @@
     color: whitesmoke;
   }
 
+  .add-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    border: solid black 5px;
+    border-radius: 50%;
+    font-size: 5vw;
+    width: 7%;
+    color: black;
+    background: whitesmoke;
+    transition-duration: 1s;
+  }
+
+  .add-button:hover {
+    background: black;
+    color: whitesmoke;
+  }
+
   #Locations {
     background: rgb(228, 142, 29);
   }

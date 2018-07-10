@@ -12,6 +12,8 @@ class Characters extends Component {
             <div className="Header" id="Characters">
                 Characters  
             </div>
+
+            <button className='add-button'>+</button>
         </div>
         )
     }
