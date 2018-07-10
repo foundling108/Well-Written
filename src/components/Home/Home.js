@@ -8,11 +8,17 @@ class Home extends Component {
     render() {
         return(
 
-            <div className="Body">
+        <div className="Body">
             <div className="Header" id="Home">
-                Home
+                Well-Written
+                <div>
+                    <p id="user">
+                        "USERNAME"
+                    </p>
+                </div>
             </div>
         </div>
+
         )
     }
 }

@@ -10,13 +10,15 @@ class Auth extends Component {
 
         <div className="Body">
             
-            <div className="Header" id="Auth">
+            <div className="Header-Auth" id="Auth">
                 <p>USERNAME:</p>
                     <input type="text"/>
                 <p>PASSWORD:</p>
                     <input type="text"/>
-                <button>Login</button>
-                <button>Sign Up</button>
+                <div>
+                    <button>Login</button>
+                    <button>Sign Up</button>
+                </div>
             </div>
         </div>
         )
