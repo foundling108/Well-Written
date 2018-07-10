@@ -1,25 +1,51 @@
-body
+/* body
 {
   margin: 0;
   padding: 0;
   
-  /* make it look decent enough */
+
   background: #232323;
   color: #cdcdcd;
-  font-family: "Avenir Next", "Avenir", sans-serif;
-}
+} */
 
 a
 {
   text-decoration: none;
-  color: #232323;
+  color: whitesmoke;
+
   
   transition: color 0.3s ease;
 }
 
-a:hover
+
+#hom:hover
 {
-  color: tomato;
+    color: rgb(60, 22, 201);
+}
+
+#chap:hover
+{
+    color: rgb(30, 140, 243);
+}
+
+#pro:hover
+{
+    color: rgb(233, 51, 51);
+}
+
+#char:hover
+{
+    color: rgb(138, 24, 138);
+}
+
+#loc:hover
+{
+    color: rgb(228, 142, 29);
+}
+
+#logout:hover
+{
+    color: rgb(19, 117, 15);
 }
 
 #menuToggle
@@ -52,9 +78,6 @@ a:hover
   -webkit-touch-callout: none;
 }
 
-/*
- * Just a quick hamburger
- */
 #menuToggle span
 {
   display: block;
@@ -93,7 +116,7 @@ a:hover
 {
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
-  background: #232323;
+  background: whitesmoke;
 }
 
 /*
@@ -120,12 +143,14 @@ a:hover
 #menu
 {
   position: absolute;
-  width: 300px;
+  width: 25vh;
   margin: -100px 0 0 -50px;
   padding: 50px;
   padding-top: 125px;
+
+  border-radius: 25px;
   
-  background: #ededed;
+  background: black;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */
@@ -136,10 +161,17 @@ a:hover
   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 }
 
+.title {
+    color: whitesmoke;
+    font-size: 3vw;
+}
+
+
+
 #menu li
 {
   padding: 10px 0;
-  font-size: 22px;
+  font-size: 2vw;
 }
 
 /*

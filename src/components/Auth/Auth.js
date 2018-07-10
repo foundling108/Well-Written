@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import './Auth.css';
 
 class Auth extends Component {
+    constructor() {
+        super();
+
+
+
+    }
     
 
 
@@ -9,15 +16,11 @@ class Auth extends Component {
         return(
 
         <div className="Body">
-            
             <div className="Header-Auth" id="Auth">
-                <p>USERNAME:</p>
-                    <input type="text"/>
-                <p>PASSWORD:</p>
-                    <input type="text"/>
-                <div>
-                    <button>Login</button>
-                    <button>Sign Up</button>
+                Well-Written
+                <div className="button-box">
+                    <button id="darkbuttons"><Link id='logbutton' to='/home'>Login</Link></button>
+                    <button id="darkbuttons">Sign Up</button>
                 </div>
             </div>
         </div>

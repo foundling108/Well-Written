@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import axios from 'axios';
+
+import { logout } from './../../dux/reducer';
+
 import './Nav.css';
 
-function Nav() {
+class Nav extends Component {
+    constructor(props) {
+        super(props);
 
+        this.logout = this.logout.bind(this);
+    }
 
+    logout() {
+        axios.post('/api/auth/logout')
+        .then(res => {
+            this(res => this.props.logout())
+        })
+    }
 
-  
-        return(
+    render() {
+        if (this.props.location.pathname !== '/') {
 
-            <nav role="navigation">
-                <div>
-                    Well-Written
-                </div>
+            return(
+                
+                <nav role="navigation">
 
                 <div id="menuToggle">
 
@@ -23,19 +38,30 @@ function Nav() {
                 
 
                     <ul id="menu">
-                        <a href="#"><li>HOME</li></a>
-                        <span className="border-line"></span>
-                        <a href="#"><li>CHAPTERS</li></a>
-                        <a href="#"><li>PROGRESS</li></a>
-                        <a href="#"><li>CHARACTERS</li></a>
-                        <a href="#"><li>LOCATIONS</li></a>
-                        <span className="border-line"></span>
-                        <a href="#"><li>LOGOUT</li></a>
+                            <div className="title">
+                                Well-Written
+                            </div>
+                        <span></span>
+                        <Link to='/home'><a href="#" id="hom"><li>HOME</li></a></Link>
+                        <span></span>
+                        <Link to='/chapters'><a href="#" id="chap"><li>CHAPTERS</li></a></Link>
+                        <Link to='/progress'><a href="#" id="pro"><li>PROGRESS</li></a></Link>
+                        <Link to='/characters'><a href="#" id="char"><li>CHARACTERS</li></a></Link>
+                        <Link to='/locations'><a href="#" id="loc"><li>LOCATIONS</li></a></Link>
+                        <span></span>
+                        <Link to='/'><a href="#" id="logout"><li>LOGOUT</li></a></Link>
                     </ul>
               </div>
             </nav>
-        )
-    
+            )
+        } else {
+            return null
+        }
+    }
 }
 
-export default Nav;
+function mapStateToProps(state) {
+    return state;
+}
+
+    export default withRouter(connect(mapStateToProps, {logout}) (Nav));

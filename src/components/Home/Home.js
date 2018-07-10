@@ -17,6 +17,15 @@ class Home extends Component {
                     </p>
                 </div>
             </div>
+
+            <section className='component-cards'>
+                <div id=''>
+
+                </div>
+
+
+            </section>
+
         </div>
 
         )
