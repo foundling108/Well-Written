@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
 
 class Home extends Component {
@@ -12,31 +13,63 @@ class Home extends Component {
             <div className="Header" id="Home">
                 Well-Written
                 <div>
-                    <p id="user">
+                    <h2 id="user">
                         "USERNAME"
-                    </p>
+                    </h2>
                 </div>
             </div>
 
             <section className='cards'>
                 <div className='component-cards'>
                     <div className='color-card' id='chaptbox'>
-                        <button id='chapbox'>Chapters</button>
+                        <Link to='/chapters'><button id='chapbox'>Chapters</button></Link>
+                    </div>
+                    <div className='box-content'>
+                        <h1>
+                            Write
+                        </h1>
+                            <p>
+                                + create new chapters
+                            </p>
                     </div>
                 </div>
                 <div className='component-cards'>
                     <div className='color-card' id='progrbox'>
-                        <button id='progbox'>Writing Progress</button>
+                    <Link to='/progress'><button id='progbox'>Writing Progress</button></Link>
+                    </div>
+                    <div className='box-content'>
+                        <h1>
+                            Track Progress
+                        </h1>
+                            <p>
+                                + create new log
+                            </p>
                     </div>
                 </div>
                 <div className='component-cards'>
                     <div className='color-card' id='charabox'>
-                        <button id='charbox'>Characters</button>
+                    <Link to='/characters'><button id='charbox'>Characters</button></Link>
+                    </div>
+                    <div className='box-content'>
+                        <h1>
+                            Who's Who
+                        </h1>
+                            <p>
+                                + create new characters
+                            </p>
                     </div>
                 </div>
                 <div className='component-cards'>
                     <div className='color-card' id='locabox'>
-                       <button id='locbox'>Locations</button>
+                    <Link to='/locations'><button id='locbox'>Locations</button></Link>
+                    </div>
+                    <div className='box-content'>
+                        <h1>
+                            Where's where
+                        </h1>
+                            <p>
+                                + create new locations
+                            </p>
                     </div>
                 </div>
             </section>
