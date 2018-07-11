@@ -29,7 +29,7 @@ class Auth extends Component {
     }
 
     login() {
-        axios.post('/api/auth/login', this.state)
+        axios.get('/api/auth/login', this.state)
         .then(res => {
             this.props.updateUser(res.data);
             this.history.push('/home');
