@@ -1,9 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const massive = require('massive');
+const session = require('express-session');
 require('dotenv').config();
 
-const controller = require('./controller.js');
+const auth_controller = require('./auth_controller.js');
 
 const checkForSession = require('./middlewares/checkForSession');
 
@@ -18,15 +19,17 @@ app.use( session({
 app.use( checkForSession )
 app.use('/', express.static(__dirname));
 
-console.log(process.env.CONNECTION_STRING)
 massive(process.env.CONNECTION_STRING)
 .then( dbInstance => {
     app.set('db', dbInstance)
 }).catch( err => console.log(err) );
 
 // Auth - the login page -
-app.post('/api/auth/signup', controller.create);
-app.get('/api/auth/login', controller.getUsers);
+// app.get('/api/auth/user', auth_controller.getUser);
+
+app.post('/api/auth/signup', auth_controller.signup);
+app.post('/api/auth/login', auth_controller.login);
+app.get('/api/auth/logout', auth_controller.logout);
 
 
 const port = process.env.PORT || 4000;

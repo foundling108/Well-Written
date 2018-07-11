@@ -29,10 +29,10 @@ class Auth extends Component {
     }
 
     login() {
-        axios.get('/api/auth/login', this.state)
+        axios.post('/api/auth/login', this.state)
         .then(res => {
             this.props.updateUser(res.data);
-            this.history.push('/home');
+            this.props.history.push('/home');
         })
     }
 
@@ -40,7 +40,7 @@ class Auth extends Component {
         axios.post('/api/auth/signup', this.state)
         .then(res => {
             this.props.updateUser(res.data);
-            this.history.push('/home');
+            this.props.history.push('/home');
         })
     }
     
