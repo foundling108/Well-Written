@@ -1,2 +1,2 @@
-INSERT INTO chapters (author_id, name, description)
-VALUES ($1, $2, $3)
+INSERT INTO chapters (author_id, description, input)
+VALUES ($1, $2, $3);

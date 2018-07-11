@@ -49,7 +49,7 @@ class Nav extends Component {
                         <Link to='/characters'><a href="#" id="char"><li>CHARACTERS</li></a></Link>
                         <Link to='/locations'><a href="#" id="loc"><li>LOCATIONS</li></a></Link>
                         <span></span>
-                        <a href="#" id="logout" onClick={this.logout}><li>LOGOUT</li></a>
+                        <a href="#" id="logout"><li onClick={this.logout}>LOGOUT</li></a>
                     </ul>
               </div>
             </nav>
