@@ -65,7 +65,7 @@ class Home extends Component {
                     </div>
                     <div className='box-content'>
                         <h1>
-                            Where's where
+                            Where's Where
                         </h1>
                             <p>
                                 + create new locations
