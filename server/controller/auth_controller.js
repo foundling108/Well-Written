@@ -50,12 +50,14 @@ module.exports = {
     } else {
         res.status(401).send('Go away.');
     }
-},
+    
+    },
 
     logout: (req, res ) => {
         req.session.destroy();
-        res.redirect('http://localhost:3000/#/');
+        res.sendStatus(200);
     },
+    // res.redirect('http://localhost:3000/#/');
 
     delete: ( req, res ) => {
         const dbInstance = req.app.get('db');

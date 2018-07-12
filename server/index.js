@@ -4,7 +4,8 @@ const massive = require('massive');
 const session = require('express-session');
 require('dotenv').config();
 
-const auth_controller = require('./auth_controller.js');
+const auth_controller = require('./controller/auth_controller.js');
+const unsplash_controller = require('./controller/unsplash_contoller');
 
 const checkForSession = require('./middlewares/checkForSession');
 
@@ -25,11 +26,13 @@ massive(process.env.CONNECTION_STRING)
 }).catch( err => console.log(err) );
 
 // Auth - the login page -
-// app.get('/api/auth/user', auth_controller.getUser);
-
 app.post('/api/auth/signup', auth_controller.signup);
 app.post('/api/auth/login', auth_controller.login);
 app.get('/api/auth/logout', auth_controller.logout);
+
+
+// Unsplash - the bacground of the Login page -
+app.get('/api/getUnsplash', unsplash_controller.getUnsplash);
 
 
 const port = process.env.PORT || 4000;

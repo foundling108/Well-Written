@@ -2,7 +2,14 @@ import React, {Component} from 'react';
 import './Characters.css';
 
 class Characters extends Component {
-    
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            name: '',
+            description: ''
+        }
+    }
 
 
     render() {

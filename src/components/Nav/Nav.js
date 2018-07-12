@@ -15,11 +15,12 @@ class Nav extends Component {
     }
 
     logout() {
-        axios.post('/api/auth/logout')
-        .then(res => {
-            this(res => this.props.logout())
+        axios.get('/api/auth/logout')
+        .then( ()=>{
+            this.props.history.push('/');
         })
-    }
+        }
+    
 
     render() {
         if (this.props.location.pathname !== '/') {

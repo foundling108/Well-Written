@@ -4,7 +4,13 @@ import './Chapters.css';
 class Chapters extends Component {
     constructor(props) {
         super(props);
-
+        
+        this.state = {
+            chapterNum: 0,
+            description: '',
+            input: '',
+            chapArray: []
+        }
 
     }
 

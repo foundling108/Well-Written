@@ -1,0 +1,53 @@
+.cards {
+    margin-top: 290px;
+  }
+
+.component-cards {
+    position: relative;
+    margin: 35px auto;
+    top: 25px;
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* padding: 50px; */
+    height: 15vh;
+    width: 70%;
+    border: solid black 5px;
+    border-radius: 25px;
+  }
+
+.box-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+h1 {
+    font-size: 5vw;
+  }
+
+
+.color-card {
+    position: absolute;
+    margin: 0 0 0 0;
+    display: grid;
+    flex-direction: row;
+    height: 14vh;
+    width: 20%;
+    border: solid grey 5px;
+    border-radius: 25px;
+  }
+
+button {
+    
+    border: none;
+    border-radius: 25px;
+    background: none;
+    
+  }
+
+a {
+    display: grid;
+  }

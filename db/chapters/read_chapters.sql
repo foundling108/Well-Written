@@ -1,3 +1,3 @@
 SELECT *
 FROM chapters
-WHERE 
+WHERE chap_id = $1;

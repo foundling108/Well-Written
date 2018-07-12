@@ -20,6 +20,14 @@ class Auth extends Component {
 
     }
 
+    componentDidMount() {
+        axios.get('/api/getUnsplash')
+        .then( res => {
+            let body = document.getElementById('body')
+            body.style.background = `url(${res.data.urls.full})`
+        })
+    }
+
     handleChange(prop, val) {
         if(val.length < 20) {
             this.setState({
@@ -49,7 +57,8 @@ class Auth extends Component {
     render() {
         return(
 
-        <div className="Body">
+        <div className="Body" id='body'>
+        
             <div className="Header-Auth" id="Auth">
                 <h1 className='auth-title'>Well-Written</h1>
                 <div className='auth-input'>
