@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './Chapters.css';
 
+import Cards from './../Cards/Cards';
+
 class Chapters extends Component {
     constructor(props) {
         super(props);
@@ -21,6 +23,10 @@ class Chapters extends Component {
         <div className="Body">
             <div className="Header" id="Chapters">
                 Chapters  
+            </div>
+
+            <div>
+                {/* { Cards } */}
             </div>
 
 

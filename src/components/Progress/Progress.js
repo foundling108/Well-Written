@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './Progress.css';
 
+import Cards from './../Cards/Cards';
+
 class Progress extends Component {
     constructor(props) {
         super(props);
@@ -19,6 +21,10 @@ class Progress extends Component {
             <div className="Body">
             <div className="Header" id="Progress">
                 Writing Progress  
+            </div>
+
+            <div>
+                {/* { Cards } */}
             </div>
 
             <button className='add-button'>+</button>

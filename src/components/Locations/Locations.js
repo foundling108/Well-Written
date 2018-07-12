@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './Locations.css';
 
+import Cards from './../Cards/Cards';
+
 class Locations extends Component {
     constructor(props) {
         super(props);
@@ -19,6 +21,10 @@ class Locations extends Component {
             <div className="Header" id="Locations">
                 Locations
             </div>  
+
+            <div>
+                {/* { Cards } */}
+            </div>
 
             <button className='add-button'>+</button>
         </div>
