@@ -27,7 +27,7 @@ class Home extends Component {
 
         <div className="Body">
             <div className="Header" id="Home">
-                Well-Written
+                idigyo / Words
                 <div>
                     <h2 id="user">
                         
