@@ -26,6 +26,10 @@ module.exports = {
         } );
     },
 
+    getUser: (req, res) => {
+        res.send(req.session.user)
+    },
+
     update: ( req, res ) => {
         const dbInstance = req.app.get('db');
         const {params, query} = req;

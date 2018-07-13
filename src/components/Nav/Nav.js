@@ -27,7 +27,7 @@ class Nav extends Component {
 
             return(
                 
-                <nav role="navigation">
+                <nav>
 
                 <div id="menuToggle">
 
@@ -43,14 +43,14 @@ class Nav extends Component {
                                 Well-Written
                             </div>
                         <span></span>
-                        <Link to='/home'><a href="#" id="hom"><li>HOME</li></a></Link>
+                        <Link to='/home'><a id="hom"><li>HOME</li></a></Link>
                         <span></span>
-                        <Link to='/chapters'><a href="#" id="chap"><li>CHAPTERS</li></a></Link>
-                        <Link to='/progress'><a href="#" id="pro"><li>PROGRESS</li></a></Link>
-                        <Link to='/characters'><a href="#" id="char"><li>CHARACTERS</li></a></Link>
-                        <Link to='/locations'><a href="#" id="loc"><li>LOCATIONS</li></a></Link>
+                        <Link to='/chapters'><a id="chap"><li>CHAPTERS</li></a></Link>
+                        <Link to='/progress'><a id="pro"><li>PROGRESS</li></a></Link>
+                        <Link to='/characters'><a id="char"><li>CHARACTERS</li></a></Link>
+                        <Link to='/locations'><a id="loc"><li>LOCATIONS</li></a></Link>
                         <span></span>
-                        <a href="#" id="logout"><li onClick={this.logout}>LOGOUT</li></a>
+                        <a id="logout"><li onClick={this.logout}>LOGOUT</li></a>
                     </ul>
               </div>
             </nav>

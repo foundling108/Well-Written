@@ -1,9 +1,25 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './Home.css';
 
 class Home extends Component {
-    
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            username: ''
+        }
+    }
+
+    componentDidMount() {
+        axios.get('/api/auth/getUser')
+        .then( res => {
+            if( !res.data ) {
+                this.props.history.push('/');
+            }
+        })
+    }
 
 
     render() {
@@ -14,7 +30,7 @@ class Home extends Component {
                 Well-Written
                 <div>
                     <h2 id="user">
-                        "USERNAME"
+                        
                     </h2>
                 </div>
             </div>

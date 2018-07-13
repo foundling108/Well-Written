@@ -17,7 +17,7 @@ app.use( session({
     resave: false,
     saveUninitialized: true
   }));
-app.use( checkForSession )
+//app.use( checkForSession )
 app.use('/', express.static(__dirname));
 
 massive(process.env.CONNECTION_STRING)
@@ -29,6 +29,7 @@ massive(process.env.CONNECTION_STRING)
 app.post('/api/auth/signup', auth_controller.signup);
 app.post('/api/auth/login', auth_controller.login);
 app.get('/api/auth/logout', auth_controller.logout);
+app.get('/api/auth/getUser', auth_controller.getUser);
 
 
 // Unsplash - the bacground of the Login page -

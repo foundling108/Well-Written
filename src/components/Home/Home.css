@@ -62,6 +62,10 @@
     font-size: 5vw;
   }
 
+  .comp-card-title {
+    font-size: 3vw;
+  }
+
 
   .color-card {
     position: absolute;
