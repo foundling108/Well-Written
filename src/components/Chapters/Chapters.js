@@ -18,15 +18,32 @@ class Chapters extends Component {
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handleChapterChange = this.handleChapterChange.bind(this);
         this.createCard = this.createCard.bind(this);
+        this.getCards = this.getCards.bind(this);
+        this.deleteCard = this.deleteCard.bind(this);
 
     }
 
     componentDidMount() {
-        //map over the card array and mount to the appropriate component on the button 'Add Card'
+            this.getCards();
+        // axios.get('/api/card/getAllChaps')
+        // .then( res => {
+        //     this.setState({
+        //         cardArray: res.data
+        //     });
+        // });
+    }
+
+    getCards() {
+        console.log('get cards')
+        axios.get('/api/cards/getChap')
+        .then(res => {
+            this.setState({
+                cardArray: res.data
+            })
+        })
     }
 
     createCard() {
-        console.log('create card')
         axios.post('/api/cards/createChap')
         .then( (res) => {
             this.setState({
@@ -39,8 +56,12 @@ class Chapters extends Component {
 
     }
 
-    deleteCard() {
-        
+    deleteCard(id) {
+        console.log('id ', id)
+        axios.delete(`/api/cards/deleteChap/${id}`)
+        .then( res => this.setState({
+            cardArray: res.data
+        }) );
     }
 
     handleDescriptionChange(prop, val) {
@@ -62,7 +83,10 @@ class Chapters extends Component {
 
     render() {
         let cards = this.state.cardArray.map((el, i)=>(
-            <Card props={el} />
+            <Card 
+            key={i}
+            props={el} 
+            deleteCard={_=>this.deleteCard(el.chap_id)}/>
         ))
 
         return(
@@ -75,25 +99,6 @@ class Chapters extends Component {
                 <section className='cards'>
                     
                     {cards}
-
-                 {/* <div className='component-cards'>
-                    <div className='chap-card'>
-                        <p>Chapter Name: </p>
-                        <input value={this.state.description} onChange={e => this.handleDescriptionChange('description', e.target.value)}/>
-                    </div>
-                    <div>
-                        <h1 className='comp-card-title'>
-                            Text:
-                        </h1>
-                            <p>
-                            <input value={this.state.input} onChange={e => this.handleChapter('input', e.target.value)}/>
-                            </p>
-                    </div>
-                    <div className='card-buttons'>
-                        <button>edit chapter</button>
-                        <button>delete chapter</button>
-                    </div>
-                </div> */}
                     
                 </section>
 
@@ -123,7 +128,7 @@ function Card (props) {
         </div>
         <div className='card-buttons'>
             <button>edit chapter</button>
-            <button>delete chapter</button>
+            <button onClick={props.deleteCard}>delete chapter</button>
         </div>
     </div>
     )

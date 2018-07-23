@@ -24,16 +24,11 @@ module.exports = {
 
     // Chapters
     createChapter: (req, res ) => {
-        console.log('create chapter', req.session.user.user_id)
         const dbInstance = req.app.get('db');
-        // const { author_id, description, input } = req.body
-        // author_id from session
+        
        
-
         dbInstance.chapters.create_chapters([  req.session.user.user_id ])
         .then( (chapters) => {
-            
-            console.log('chapters: ', chapters)
             res.status(200).send( chapters )} )
         .catch( err => {
             res.status(500).send({errorMessage: "Could not create chapter"});
@@ -44,13 +39,13 @@ module.exports = {
     getAllChapters: (req, res) => {
         const dbInstance = req.app.get('db');
 
-        dbInstance.locations.get_chapters([req.session.user.id])
+        dbInstance.locations.get_chapters([req.session.user.user_id])
     },
 
     getChapter: (req, res) => {
         const dbInstance = req.app.get('db');
 
-
+         
     },
 
     editChapter: (req, res) => {
@@ -61,15 +56,27 @@ module.exports = {
 
     deleteChapter: (req, res) => {
         const dbInstance = req.app.get('db');
+        const { params } = req;
 
-
+        dbInstance.chapters.delete_chapter([params.id])
+        .then( (chapters) => res.status(200).send(chapters) )
+        .catch( err => {
+            res.status(500).send({errorMessage: "Could not delete"});
+            console.log(err)
+        } );
     },
     
     // Locations
     createLocation: (req, res ) => {
         const dbInstance = req.app.get('db');
 
-
+        dbInstance.locations.create_locations([  req.session.user.user_id ])
+        .then( (locations) => {
+            res.status(200).send( locations )} )
+        .catch( err => {
+            res.status(500).send({errorMessage: "Could not create location"});
+            console.log(err)
+        } );
     },
 
     getAllLocations: (req, res) => {
@@ -92,15 +99,27 @@ module.exports = {
 
     deleteLocation: (req, res) => {
         const dbInstance = req.app.get('db');
+        const { params } = req;
 
-
+        dbInstance.locations.delete_location([params.id])
+        .then( (locations) => res.status(200).send(locations) )
+        .catch( err => {
+            res.status(500).send({errorMessage: "Could not delete"});
+            console.log(err)
+        } );
     },
 
     // Characters
     createCharacter: (req, res ) => {
         const dbInstance = req.app.get('db');
 
-
+        dbInstance.characters.create_character([  req.session.user.user_id ])
+        .then( (characters) => {
+            res.status(200).send( characters )} )
+        .catch( err => {
+            res.status(500).send({errorMessage: "Could not create character"});
+            console.log(err)
+        } );
     },
 
     getAllCharacters: (req, res) => {
@@ -123,15 +142,27 @@ module.exports = {
 
     deleteCharacter: (req, res) => {
         const dbInstance = req.app.get('db');
+        const { params } = req;
 
-
+        dbInstance.characters.delete_character([params.id])
+        .then( (characters) => res.status(200).send(characters) )
+        .catch( err => {
+            res.status(500).send({errorMessage: "Could not delete"});
+            console.log(err)
+        } );
     },
 
     // Progress
     createProgress: (req, res ) => {
         const dbInstance = req.app.get('db');
 
-
+        dbInstance.progress.create_progress([  req.session.user.user_id ])
+        .then( (progress) => {
+            res.status(200).send( progress )} )
+        .catch( err => {
+            res.status(500).send({errorMessage: "Could not log progress"});
+            console.log(err)
+        } );
     },
 
     getAllProgress: (req, res) => {
@@ -154,11 +185,12 @@ module.exports = {
 
     deleteProgress: (req, res) => {
         const dbInstance = req.app.get('db');
+        const { params } = req;
 
-        dbInstance.progress.delete_progress([req.session.user.id])
-        .then( () => res.sendStatus(200) )
+        dbInstance.progress.delete_progress([params.id])
+        .then( (progress) => res.status(200).send(progress) )
         .catch( err => {
-            res.status(500).send({errorMessage: "Could not delete progress"});
+            res.status(500).send({errorMessage: "Could not delete"});
             console.log(err)
         } );
     }

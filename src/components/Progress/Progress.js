@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import './Progress.css';
 
 // import Cards from './../Cards/Cards';
@@ -15,10 +16,20 @@ class Progress extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.createCard = this.createCard.bind(this);
     }
 
     componentDidMount() {
         //map over the card array and mount to the appropriate component on the button 'Add Card'
+    }
+
+    createCard() {
+        axios.post('/api/cards/createProg')
+        .then( (res) => {
+            this.setState({
+                cardArray: res.data
+            })
+        } )
     }
 
     handleChange(prop, val) {
@@ -31,6 +42,10 @@ class Progress extends Component {
 
 
     render() {
+        let cards = this.state.cardArray.map((el, i)=>(
+            <Card props={el} />
+        ))
+
         return(
 
             <div className="Body">
@@ -39,27 +54,9 @@ class Progress extends Component {
             </div>
                 
                 <section className='cards'>
-                    {this.state.cardArray.length
-                ? <div className='component-cards'>
-                    <div className='prog-card' >
-                        <p>Log Entry # </p>
-                        <input value={this.state.logNum} onChange={e => this.handleChange('logNum', e.target.value)}/>
-                    </div>
-                    <div>
-                        <h1 className='comp-card-title'>
-                            Date: <input value={this.state.date} onChange={e => this.handleChange('date', e.target.value)}/>
-                        </h1>
-                            <p>
-                                Word Count: 
-                                <input value={this.state.inputCount} onChange={e => this.handleChange('inputCount', e.target.value)}/>
-                            </p>
-                    </div>
-                    <div className='card-buttons'>
-                        <button>edit log</button>
-                        <button>delete log</button>
-                    </div>
-                </div> : null
-                    }
+                   
+                    {cards}
+                    
                 </section>
 
             <button className='add-button'>+</button>
@@ -69,3 +66,27 @@ class Progress extends Component {
 }
 
 export default Progress;
+
+function Card(props) {
+    return(
+        <div className='component-cards'>
+        <div className='prog-card' >
+            <p>Log Entry # </p>
+            <input value={this.state.logNum} onChange={e => this.handleChange('logNum', e.target.value)}/>
+        </div>
+        <div>
+            <h1 className='comp-card-title'>
+                Date: <input value={this.state.date} onChange={e => this.handleChange('date', e.target.value)}/>
+            </h1>
+                <p>
+                    Word Count: 
+                    <input value={this.state.inputCount} onChange={e => this.handleChange('inputCount', e.target.value)}/>
+                </p>
+        </div>
+        <div className='card-buttons'>
+            <button>edit log</button>
+            <button>delete log</button>
+        </div>
+    </div> 
+    )
+}
