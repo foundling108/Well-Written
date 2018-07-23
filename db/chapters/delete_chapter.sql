@@ -1,2 +1,2 @@
 DELETE FROM chapters
-WHERE author_id = $1;
+WHERE chap_id = $1;

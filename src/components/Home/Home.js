@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { getUserData } from './../../dux/reducer';
+import { connect } from 'react-redux';
 import './Home.css';
 
 class Home extends Component {
@@ -30,7 +32,7 @@ class Home extends Component {
                 idigyo / Words
                 <div>
                     <h2 id="user">
-                        
+                        {this.props.user.username ? this.props.user.username : null}
                     </h2>
                 </div>
             </div>
@@ -96,4 +98,10 @@ class Home extends Component {
     }
 }
 
-export default Home;
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    };
+}
+
+export default connect(mapStateToProps, { getUserData }) (Home);

@@ -34,11 +34,11 @@ app.get('/api/auth/getUser', auth_controller.getUser);
 
 
 
-// Create a card controller that checs the users location (home, chapters, etc.) and app.whatevers the method depending on that. //
+// Create a card controller that checks the users location (home, chapters, etc.) and app.whatevers the method depending on that. //
 ////// Cards - for each component -
 
 // Chapter cards
-// app.post('/api/cards/createChap', card_controller.createChapter);
+ app.post('/api/cards/createChap', card_controller.createChapter);
 // app.get('/api/cards/getChap', card_controller.getChapter);
 // app.get('/api/cards/getAllChaps', card_controller.getAllChapters);
 // app.put('/api/cards/updateChap' ,card_controller.updateChapter);

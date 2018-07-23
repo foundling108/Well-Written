@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import './Chapters.css';
 
 // import Cards from './../Cards/Cards';
@@ -9,18 +10,37 @@ class Chapters extends Component {
         
         this.state = {
             chapterNum: 0,
-            chapArray: [],
+            cardArray: [],
             description: '',
             input: ''
         }
 
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-        this.handleChapter = this.handleChapter.bind(this);
+        this.handleChapterChange = this.handleChapterChange.bind(this);
+        this.createCard = this.createCard.bind(this);
 
     }
 
     componentDidMount() {
         //map over the card array and mount to the appropriate component on the button 'Add Card'
+    }
+
+    createCard() {
+        console.log('create card')
+        axios.post('/api/cards/createChap')
+        .then( (res) => {
+            this.setState({
+                cardArray: res.data
+            })
+        } )
+    }
+
+    editCard() {
+
+    }
+
+    deleteCard() {
+        
     }
 
     handleDescriptionChange(prop, val) {
@@ -31,7 +51,7 @@ class Chapters extends Component {
         }
     }
 
-    handleChapter(prop, val) {
+    handleChapterChange(prop, val) {
         if(val.length < 5000) {
             this.setState({
                 [prop]: val
@@ -41,6 +61,10 @@ class Chapters extends Component {
 
 
     render() {
+        let cards = this.state.cardArray.map((el, i)=>(
+            <Card props={el} />
+        ))
+
         return(
 
         <div className="Body">
@@ -49,8 +73,10 @@ class Chapters extends Component {
             </div>
 
                 <section className='cards'>
+                    
+                    {cards}
 
-                <div className='component-cards'>
+                 {/* <div className='component-cards'>
                     <div className='chap-card'>
                         <p>Chapter Name: </p>
                         <input value={this.state.description} onChange={e => this.handleDescriptionChange('description', e.target.value)}/>
@@ -67,11 +93,11 @@ class Chapters extends Component {
                         <button>edit chapter</button>
                         <button>delete chapter</button>
                     </div>
-                </div>
-
+                </div> */}
+                    
                 </section>
 
-                <button className='add-button'>+</button>
+                <button className='add-button' onClick={this.createCard}>+</button>
 
         </div>
         )
@@ -79,3 +105,26 @@ class Chapters extends Component {
 }
 
 export default Chapters;
+
+function Card (props) {
+    return (
+        <div className='component-cards'>
+        <div className='chap-card'>
+            <p>Chapter Name: </p>
+            <input value={props.description} onChange={e => this.handleDescriptionChange('description', e.target.value)}/>
+        </div>
+        <div>
+            <h1 className='comp-card-title'>
+                Text:
+            </h1>
+                <p>
+                <input value={props.input} onChange={e => this.handleChapter('input', e.target.value)}/>
+                </p>
+        </div>
+        <div className='card-buttons'>
+            <button>edit chapter</button>
+            <button>delete chapter</button>
+        </div>
+    </div>
+    )
+}

@@ -39,8 +39,8 @@ class Progress extends Component {
             </div>
                 
                 <section className='cards'>
-
-                <div className='component-cards'>
+                    {this.state.cardArray.length
+                ? <div className='component-cards'>
                     <div className='prog-card' >
                         <p>Log Entry # </p>
                         <input value={this.state.logNum} onChange={e => this.handleChange('logNum', e.target.value)}/>
@@ -58,8 +58,8 @@ class Progress extends Component {
                         <button>edit log</button>
                         <button>delete log</button>
                     </div>
-                </div>
-
+                </div> : null
+                    }
                 </section>
 
             <button className='add-button'>+</button>

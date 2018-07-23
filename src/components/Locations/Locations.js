@@ -44,8 +44,8 @@ class Locations extends Component {
             </div>  
 
                 <section className='cards'>
-
-                <div className='component-cards'>
+                    {this.state.cardArray.length
+                ? <div className='component-cards'>
                     <div className='loc-card'>
                         <p>Name:</p>
                         <input value={this.state.name} onChange={e => this.handleNameChange('name', e.target.value)}/>
@@ -58,12 +58,12 @@ class Locations extends Component {
                                 <input value={this.state.description} onChange={e => this.handleDescriptionChange('description', e.target.value)}/>
                             </p>
                     </div>
-                    <div className='card-buttons'>
+                    <div className='card-buttons'>s
                         <button>edit location</button>
                         <button>delete location</button>
                     </div>
-                </div>
-
+                </div> : null
+                    }
                 </section>
 
             <button className='add-button'>+</button>

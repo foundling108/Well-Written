@@ -1,2 +1,2 @@
 DELETE FROM locations
-WHERE author_id = $1;
+WHERE loc_id = $1;

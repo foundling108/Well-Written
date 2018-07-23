@@ -1,2 +1,5 @@
-INSERT INTO  progress (author_id, word_count, date)
-VALUES ($1, $2, $3);
+INSERT INTO  progress (author_id)
+VALUES ($1);
+SELECT *
+FROM progress
+WHERE author_id = $1

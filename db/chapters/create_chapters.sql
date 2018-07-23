@@ -1,2 +1,5 @@
-INSERT INTO chapters (author_id, description, input)
-VALUES ($1, $2, $3);
+INSERT INTO chapters (author_id)
+VALUES ($1);
+SELECT *
+FROM chapters
+WHERE author_id = $1

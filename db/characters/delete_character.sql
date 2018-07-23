@@ -1,2 +1,2 @@
 DELETE FROM characters
-WHERE author_id = $1;
+WHERE char_id = $1;

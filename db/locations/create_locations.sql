@@ -1,2 +1,5 @@
-INSERT INTO  locations (author_id, name, description)
-VALUES ($1, $2, $3);
+INSERT INTO  locations (author_id)
+VALUES ($1);
+SELECT *
+FROM locations
+WHERE author_id = $1

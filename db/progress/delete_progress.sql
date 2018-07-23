@@ -1,2 +1,2 @@
 DELETE FROM progress
-WHERE author_id = $1;
+WHERE log_id = $1;
