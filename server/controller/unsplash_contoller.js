@@ -1,5 +1,5 @@
 require('dotenv').config();
-const externalUrl = `https://api.unsplash.com/photos/random?query=text/&client_id=${process.env.ACCESS_KEY}`
+const externalUrl = `https://api.unsplash.com/photos/random?query=libraries/&client_id=${process.env.ACCESS_KEY}`
 const axios = require('axios');
 
 

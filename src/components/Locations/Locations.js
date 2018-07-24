@@ -17,6 +17,22 @@ class Locations extends Component {
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.createCard = this.createCard.bind(this);
+        this.getCards = this.getCards.bind(this);
+        this.deleteCard = this.deleteCard.bind(this);
+    }
+
+    componentDidMount() {
+        this.getCards();
+    }
+
+    getCards() {
+        console.log('get cards')
+        axios.get('/api/cards/getChap')
+        .then(res => {
+            this.setState({
+                cardArray: res.data
+            })
+        })
     }
 
     createCard() {
@@ -28,6 +44,17 @@ class Locations extends Component {
         } )
     }
 
+    editCard() {
+
+    }
+
+    deleteCard(id) {
+        console.log('id ', id)
+        axios.delete(`/api/cards/deleteLoc/${id}`)
+        .then( res => this.setState({
+            cardArray: res.data
+        }) );
+    }
 
     handleNameChange(prop, val) {
         if(val.length < 80) {
@@ -48,7 +75,10 @@ class Locations extends Component {
 
     render() {
         let cards = this.state.cardArray.map((el, i)=>(
-            <Card props={el} />
+            <Card 
+            key={i}
+            props={el} 
+            deleteCard={_=>this.deleteCard(el.loc_id)}/>
         ))
 
         return(
@@ -64,7 +94,7 @@ class Locations extends Component {
                     
                 </section>
 
-            <button className='add-button'>+</button>
+            <button className='add-button' onClick={this.createCard}>+</button>
         </div>
         )
     }
@@ -89,7 +119,7 @@ function Card(props) {
         </div>
         <div className='card-buttons'>s
             <button>edit location</button>
-            <button>delete location</button>
+            <button onClick={props.deleteCard}>delete location</button>
         </div>
     </div>
     )

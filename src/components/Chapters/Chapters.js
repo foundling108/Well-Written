@@ -52,8 +52,16 @@ class Chapters extends Component {
         } )
     }
 
-    editCard() {
-
+    editCard(chap_id) {
+        const { description, input } = this.state
+        axios.put('/api/cards/updateChap', {chap_id, description, input})
+        .then( (res) => {
+            this.setState({
+                cardArray: res.data,
+                description: '',
+                input: ''
+            })
+        })
     }
 
     deleteCard(id) {
@@ -85,8 +93,14 @@ class Chapters extends Component {
         let cards = this.state.cardArray.map((el, i)=>(
             <Card 
             key={i}
-            props={el} 
-            deleteCard={_=>this.deleteCard(el.chap_id)}/>
+            chapter={el} 
+            deleteCard={_=>this.deleteCard(el.chap_id)}
+            editCard={_=>this.editCard(el.chap_id)}
+            handleDescriptionChange={this.handleDescriptionChange}
+            handleChapterChange={this.handleChapterChange}
+            userInput={this.state.input}
+            userDescription={this.state.description}
+            />
         ))
 
         return(
@@ -112,22 +126,26 @@ class Chapters extends Component {
 export default Chapters;
 
 function Card (props) {
+    console.log('props: ', props)
     return (
         <div className='component-cards'>
         <div className='chap-card'>
             <p>Chapter Name: </p>
-            <input value={props.description} onChange={e => this.handleDescriptionChange('description', e.target.value)}/>
+            <p> chapter id: {props.chapter.chap_id}</p>
+            <p>{props.chapter.description}</p>
+            <p> {props.chapter.input}</p>
+            <input value={props.userDescription} onChange={e => props.handleDescriptionChange('description', e.target.value)}/>
         </div>
         <div>
             <h1 className='comp-card-title'>
                 Text:
             </h1>
                 <p>
-                <input value={props.input} onChange={e => this.handleChapter('input', e.target.value)}/>
+                <input value={props.userInput} onChange={e => props.handleChapterChange('input', e.target.value)}/>
                 </p>
         </div>
         <div className='card-buttons'>
-            <button>edit chapter</button>
+            <button onClick={props.editCard}>edit chapter</button>
             <button onClick={props.deleteCard}>delete chapter</button>
         </div>
     </div>

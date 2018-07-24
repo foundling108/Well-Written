@@ -12,7 +12,7 @@ module.exports = {
 
     // },
 
-    // editCard: (req, res) => {
+    // updateCard: (req, res) => {
 
     // },
 
@@ -43,9 +43,9 @@ module.exports = {
 
     getChapter: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { params } = req;
+        
          
-        dbInstance.chapters.read_chapter([params.id])
+        dbInstance.chapters.read_chapter([req.session.user.user_id])
         .then( ( chapters ) => res.status(200).send( chapters ))
         .catch( err => {
             res.status(500).send({errorMessage: "Could not get chapters"});
@@ -53,14 +53,18 @@ module.exports = {
         } );
     },
 
-    editChapter: (req, res) => {
+    updateChapter: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { params } = req;
+        // req.body.chap_id
+        // req.body.description req.body.input
 
-        dbInstance.chapters.update_chapters([params.id])
-        .then( () => res.sendStatus(200) )
+        const { chap_id, description, input } = req.body;
+        console.log('update chapter ', chap_id, description, input)
+
+        dbInstance.chapters.update_chapter([chap_id, description, input, req.session.user.user_id])
+        .then( (chapters) => res.status(200).send(chapters) )
         .catch( err => {
-            res.status(500).send({errorMessage: "Could not edit"});
+            res.status(500).send({errorMessage: "Could not update"});
             console.log(err)
         } );
     },
@@ -99,9 +103,9 @@ module.exports = {
 
     getLocation: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { params } = req;
+        
          
-        dbInstance.locations.read_location([params.id])
+        dbInstance.locations.read_location([req.session.user.user_id])
         .then( ( locations ) => res.status(200).send( locations ))
         .catch( err => {
             res.status(500).send({errorMessage: "Could not get locations"});
@@ -109,14 +113,14 @@ module.exports = {
         } );
     },
 
-    editLocation: (req, res) => {
+    updateLocation: (req, res) => {
         const dbInstance = req.app.get('db');
         const { params } = req;
 
         dbInstance.locations.update_locations([params.id])
         .then( () => res.sendStatus(200) )
         .catch( err => {
-            res.status(500).send({errorMessage: "Could not edit"});
+            res.status(500).send({errorMessage: "Could not update"});
             console.log(err)
         } );
     },
@@ -138,7 +142,7 @@ module.exports = {
     createCharacter: (req, res ) => {
         const dbInstance = req.app.get('db');
 
-        dbInstance.characters.create_character([  req.session.user.user_id ])
+        dbInstance.characters.create_characters([  req.session.user.user_id ])
         .then( (characters) => {
             res.status(200).send( characters )} )
         .catch( err => {
@@ -155,9 +159,9 @@ module.exports = {
 
     getCharacter: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { params } = req;
+        
          
-        dbInstance.characters.read_character([params.id])
+        dbInstance.characters.read_character([req.session.user.user_id])
         .then( ( characters ) => res.status(200).send( characters ))
         .catch( err => {
             res.status(500).send({errorMessage: "Could not get characters"});
@@ -165,14 +169,14 @@ module.exports = {
         } );
     },
 
-    editCharacter: (req, res) => {
+    updateCharacter: (req, res) => {
         const dbInstance = req.app.get('db');
         const { params } = req;
 
         dbInstance.characters.update_characters([params.id])
         .then( () => res.sendStatus(200) )
         .catch( err => {
-            res.status(500).send({errorMessage: "Could not edit"});
+            res.status(500).send({errorMessage: "Could not update"});
             console.log(err)
         } );
     },
@@ -211,9 +215,9 @@ module.exports = {
 
     getProgress: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { params } = req;
+        
          
-        dbInstance.progress.read_progress([params.id])
+        dbInstance.progress.read_progress([req.session.user.user_id])
         .then( ( progress ) => res.status(200).send( progress ))
         .catch( err => {
             res.status(500).send({errorMessage: "Could not get progress"});
@@ -221,14 +225,14 @@ module.exports = {
         } );
     },
 
-    editProgress: (req, res) => {
+    updateProgress: (req, res) => {
         const dbInstance = req.app.get('db');
         const { params } = req;
 
         dbInstance.progress.update_progress([params.id])
         .then( () => res.sendStatus(200) )
         .catch( err => {
-            res.status(500).send({errorMessage: "Could not edit"});
+            res.status(500).send({errorMessage: "Could not update"});
             console.log(err)
         } );
     },

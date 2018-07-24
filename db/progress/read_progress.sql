@@ -1,3 +1,3 @@
 SELECT *
 FROM progress
-WHERE log_id = $1;
+WHERE author_id = $1;

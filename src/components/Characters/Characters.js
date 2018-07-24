@@ -17,14 +17,22 @@ class Characters extends Component {
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.createCard = this.createCard.bind(this);
+        this.getCards = this.getCards.bind(this);
+        this.deleteCard = this.deleteCard.bind(this);
     }
 
     componentDidMount() {
-        //database call based on user to verify whether or not the user has created a card, then mounts whatever was found. 
-        //or returns null, meaning no card is mounted, leveing the componet page empty.
-        axios.get('/api/card/getCards')
+        this.getCards();
+    }
 
-
+    getCards() {
+        console.log('get cards')
+        axios.get('/api/cards/getChar')
+        .then(res => {
+            this.setState({
+                cardArray: res.data
+            })
+        })
     }
 
     createCard() {
@@ -34,6 +42,18 @@ class Characters extends Component {
                 cardArray: res.data
             })
         } )
+    }
+
+    editCard() {
+        
+    }
+
+    deleteCard(id) {
+        console.log('id ', id)
+        axios.delete(`/api/cards/deleteChar/${id}`)
+        .then( res => this.setState({
+            cardArray: res.data
+        }) );
     }
 
 
@@ -55,7 +75,10 @@ class Characters extends Component {
 
     render() {
         let cards = this.state.cardArray.map((el, i)=>(
-            <Card props={el} />
+            <Card
+            key={i} 
+            props={el}
+            deleteCard={_=>this.deleteCard(el.char_id)}/>
         ))
 
         return(
@@ -71,7 +94,7 @@ class Characters extends Component {
                     
                 </section>
 
-            <button className='add-button'>+</button>
+            <button className='add-button' onClick={this.createCard}>+</button>
         </div>
         )
     }
@@ -96,7 +119,7 @@ function Card(props) {
         </div>
         <div className='card-buttons'>
             <button>edit character</button>
-            <button>delete character</button>
+            <button onClick={props.deleteCard}>delete character</button>
         </div>
     </div> 
     )

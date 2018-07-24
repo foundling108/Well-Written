@@ -1,3 +1,3 @@
 SELECT *
 FROM characters
-WHERE char_id = $1;
+WHERE author_id = $1;

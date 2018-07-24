@@ -1,3 +1,3 @@
 SELECT *
 FROM chapters
-WHERE chap_id = $1;
+WHERE author_id = $1;
