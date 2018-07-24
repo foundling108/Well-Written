@@ -55,9 +55,6 @@ module.exports = {
 
     updateChapter: (req, res) => {
         const dbInstance = req.app.get('db');
-        // req.body.chap_id
-        // req.body.description req.body.input
-
         const { chap_id, description, input } = req.body;
         console.log('update chapter ', chap_id, description, input)
 
@@ -115,10 +112,10 @@ module.exports = {
 
     updateLocation: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { params } = req;
+        const { loc_id, name, description } = req.body;
 
-        dbInstance.locations.update_locations([params.id])
-        .then( () => res.sendStatus(200) )
+        dbInstance.locations.update_location([loc_id, name, description, req.session.user.user_id])
+        .then( (locations) => res.status(200).send(locations) )
         .catch( err => {
             res.status(500).send({errorMessage: "Could not update"});
             console.log(err)
@@ -171,10 +168,10 @@ module.exports = {
 
     updateCharacter: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { params } = req;
+        const { char_id, name, description } = req.body;
 
-        dbInstance.characters.update_characters([params.id])
-        .then( () => res.sendStatus(200) )
+        dbInstance.characters.update_character([char_id, name, description, req.session.user.user_id])
+        .then( (characters) => res.status(200).send(characters) )
         .catch( err => {
             res.status(500).send({errorMessage: "Could not update"});
             console.log(err)
@@ -227,10 +224,10 @@ module.exports = {
 
     updateProgress: (req, res) => {
         const dbInstance = req.app.get('db');
-        const { params } = req;
+        const { log_id, word_count, date } = req.body;
 
-        dbInstance.progress.update_progress([params.id])
-        .then( () => res.sendStatus(200) )
+        dbInstance.progress.update_progress([log_id, word_count, date, req.session.user.user_id])
+        .then( (progress) => res.status(200).send(progress) )
         .catch( err => {
             res.status(500).send({errorMessage: "Could not update"});
             console.log(err)

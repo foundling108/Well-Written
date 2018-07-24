@@ -50,21 +50,21 @@ app.get('/api/auth/getUser', auth_controller.getUser);
  app.post('/api/cards/createLoc', card_controller.createLocation);
  app.get('/api/cards/getLoc', card_controller.getLocation);
 // app.get('/api/cards/getAllLocs', card_controller.getAllLocations);
-// app.put('/api/cards/updateLoc' ,card_controller.updateLocation);
+ app.put('/api/cards/updateLoc' ,card_controller.updateLocation);
  app.delete('/api/cards/deleteLoc/:id', card_controller.deleteLocation);
 
 // // Character cards
  app.post('/api/cards/createChar', card_controller.createCharacter);
  app.get('/api/cards/getChar', card_controller.getCharacter);
 // app.get('/api/cards/getAllChars', card_controller.getAllCharacters);
-// app.put('/api/cards/updateChar' ,card_controller.updateCharacter);
+ app.put('/api/cards/updateChar' ,card_controller.updateCharacter);
  app.delete('/api/cards/deleteChar/:id', card_controller.deleteCharacter);
 
 // // Progress cards
  app.post('/api/cards/createProg', card_controller.createProgress);
  app.get('/api/cards/getProg', card_controller.getProgress);
 // app.get('/api/cards/getAllProgs', card_controller.getAllProgress);
-// app.put('/api/cards/updateProg' ,card_controller.updateProgress);
+ app.put('/api/cards/updateProg' ,card_controller.updateProgress);
  app.delete('/api/cards/deleteProg/:id', card_controller.deleteProgress);
 
 ////// Cards - for each component -

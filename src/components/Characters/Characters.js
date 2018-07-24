@@ -18,6 +18,7 @@ class Characters extends Component {
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.createCard = this.createCard.bind(this);
         this.getCards = this.getCards.bind(this);
+        this.editCard = this.editCard.bind(this);
         this.deleteCard = this.deleteCard.bind(this);
     }
 
@@ -44,8 +45,16 @@ class Characters extends Component {
         } )
     }
 
-    editCard() {
-        
+    editCard(char_id) {
+        const { name, description } = this.state
+        axios.put('/api/cards/updateChar', {char_id, name, description})
+        .then( (res) => {
+            this.setState({
+                cardArray: res.data,
+                name: '',
+                description: ''
+            })
+        })
     }
 
     deleteCard(id) {
@@ -77,8 +86,13 @@ class Characters extends Component {
         let cards = this.state.cardArray.map((el, i)=>(
             <Card
             key={i} 
-            props={el}
-            deleteCard={_=>this.deleteCard(el.char_id)}/>
+            character={el}
+            deleteCard={_=>this.deleteCard(el.char_id)}
+            editCard={_=>this.editCard(el.char_id)}
+            handleNameChange={this.handleNameChange}
+            handleDescriptionChange={this.handleDescriptionChange}
+            userName={this.state.name}
+            userDescription={this.state.description}/>
         ))
 
         return(
@@ -107,18 +121,21 @@ function Card(props) {
         <div className='component-cards'>
         <div className='char-card'>
             <p>Name:</p>
-            <input value={props.name} onChange={e => this.handleNameChange('name', e.target.value)}/>
+            <p>character id: {props.character.char_id}</p>
+            <p className="cardFiller" >{props.character.name}</p>
+            <p className="cardFiller" >{props.character.description}</p>
+            <input className="inputBoxes" value={props.userName} onChange={e => props.handleNameChange('name', e.target.value)}/>
         </div>
         <div>
             <h1 className='comp-card-title'>
                 Description:
             </h1>
                 <p>
-                    <input value={props.description} onChange={e => this.handleDescriptionChange('description', e.target.value)}/>
+                    <input className="inputBoxes" value={props.userDescription} onChange={e => props.handleDescriptionChange('description', e.target.value)}/>
                 </p>
         </div>
         <div className='card-buttons'>
-            <button>edit character</button>
+            <button onClick={props.editCard}>edit character</button>
             <button onClick={props.deleteCard}>delete character</button>
         </div>
     </div> 

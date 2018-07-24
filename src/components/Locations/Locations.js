@@ -18,6 +18,7 @@ class Locations extends Component {
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.createCard = this.createCard.bind(this);
         this.getCards = this.getCards.bind(this);
+        this.editCard = this.editCard.bind(this);
         this.deleteCard = this.deleteCard.bind(this);
     }
 
@@ -27,7 +28,7 @@ class Locations extends Component {
 
     getCards() {
         console.log('get cards')
-        axios.get('/api/cards/getChap')
+        axios.get('/api/cards/getloc')
         .then(res => {
             this.setState({
                 cardArray: res.data
@@ -44,8 +45,16 @@ class Locations extends Component {
         } )
     }
 
-    editCard() {
-
+    editCard(loc_id) {
+        const { name, description } = this.state
+        axios.put('/api/cards/updateLoc', {loc_id, name, description})
+        .then( (res) => {
+            this.setState({
+                cardArray: res.data,
+                name: '',
+                description: ''
+            })
+        })
     }
 
     deleteCard(id) {
@@ -77,8 +86,13 @@ class Locations extends Component {
         let cards = this.state.cardArray.map((el, i)=>(
             <Card 
             key={i}
-            props={el} 
-            deleteCard={_=>this.deleteCard(el.loc_id)}/>
+            locations={el} 
+            deleteCard={_=>this.deleteCard(el.loc_id)}
+            editCard={_=>this.editCard(el.loc_id)}
+            handleNameChange={this.handleNameChange}
+            handleDescriptionChange={this.handleDescriptionChange}
+            userName={this.state.name}
+            userDescription={this.state.description}/>
         ))
 
         return(
@@ -107,18 +121,21 @@ function Card(props) {
         <div className='component-cards'>
         <div className='loc-card'>
             <p>Name:</p>
-            <input value={props.name} onChange={e => this.handleNameChange('name', e.target.value)}/>
+            <p>location id: {props.locations.loc_id}</p>
+            <p className="cardFiller" >{props.locations.name}</p>
+            <p className="cardFiller" >{props.locations.description}</p>
+            <input className="inputBoxes" value={props.userName} onChange={e => props.handleNameChange('name', e.target.value)}/>
         </div>
         <div>
             <h1 className='comp-card-title'>
                 Description:
             </h1>
                 <p>
-                    <input value={props.description} onChange={e => this.handleDescriptionChange('description', e.target.value)}/>
+                    <input className="inputBoxes" value={props.userDescription} onChange={e => props.handleDescriptionChange('description', e.target.value)}/>
                 </p>
         </div>
-        <div className='card-buttons'>s
-            <button>edit location</button>
+        <div className='card-buttons'>
+            <button onClick={props.editCard}>edit location</button>
             <button onClick={props.deleteCard}>delete location</button>
         </div>
     </div>

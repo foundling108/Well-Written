@@ -18,6 +18,7 @@ class Progress extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.createCard = this.createCard.bind(this);
         this.getCards = this.getCards.bind(this);
+        this.editCard = this.editCard.bind(this);
         this.deleteCard = this.deleteCard.bind(this);
     }
 
@@ -35,8 +36,17 @@ class Progress extends Component {
         })
     }
 
-    editCard() {
-
+    editCard(log_id) {
+        const { logNum, word_count, date } = this.state
+        axios.put('/api/cards/updateProg', {log_id, logNum, word_count, date})
+        .then( (res) => [
+            this.setState({
+                cardArray: res.data,
+                logNum: '',
+                inputCount: '',
+                date: ''
+            })
+        ])
     }
 
     createCard() {
@@ -69,8 +79,13 @@ class Progress extends Component {
         let cards = this.state.cardArray.map((el, i)=>(
             <Card 
             key={i}
-            props={el} 
-            deleteCard={_=>this.deleteCard(el.log_id)}/>
+            progress={el} 
+            deleteCard={_=>this.deleteCard(el.log_id)}
+            editCard={_=>this.editCard(el.log_id)}
+            handleChange={this.handleChange}
+            userLogNum={this.state.logNum}
+            userInputCount={this.state.word_count}
+            userDate={this.state.date}/>
         ))
 
         return(
@@ -99,21 +114,24 @@ function Card(props) {
         <div className='component-cards'>
         <div className='prog-card' >
             <p>Log Entry # </p>
-            <input value={props.logNum} onChange={e => this.handleChange('logNum', e.target.value)}/>
+            <p> log id: {props.progress.log_id}</p>
+            <p className="cardFiller" >{props.progress.word_count}</p>
+            <p className="cardFiller" >{props.progress.date}</p>
+            <input className="inputBoxes" value={props.userLogNum} onChange={e => props.handleChange('logNum', e.target.value)}/>
         </div>
         <div>
             <h1 className='comp-card-title'>
-                Date: <input value={props.date} onChange={e => this.handleChange('date', e.target.value)}/>
+                Date: <input className="inputBoxes" value={props.userDate} onChange={e => props.handleChange('date', e.target.value)}/>
             </h1>
                 <p>
                     Word Count: 
-                    <input value={props.inputCount} onChange={e => this.handleChange('inputCount', e.target.value)}/>
+                    <input className="inputBoxes" value={props.userInputCount} onChange={e => props.handleChange('inputCount', e.target.value)}/>
                 </p>
         </div>
         <div className='card-buttons'>
-            <button>edit log</button>
+            <button onClick={props.editCard}>edit log</button>
             <button onClick={props.deleteCard}>delete log</button>
         </div>
     </div> 
     )
-}
+} 

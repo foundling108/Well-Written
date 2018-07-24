@@ -41,3 +41,32 @@
     background: rgb(30, 140, 243);
   }
 
+  .inputBoxes {
+    margin: 1vw;
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  .cardFiller {
+    float: right;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #editbutton {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+  }
+
+  .card-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+
+  }
+
