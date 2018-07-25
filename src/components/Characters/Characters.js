@@ -120,19 +120,12 @@ function Card(props) {
     return(
         <div className='component-cards'>
         <div className='char-card'>
-            <p>Name:</p>
-            <p>character id: {props.character.char_id}</p>
-            <p className="cardFiller" >{props.character.name}</p>
-            <p className="cardFiller" >{props.character.description}</p>
-            <input className="inputBoxes" value={props.userName} onChange={e => props.handleNameChange('name', e.target.value)}/>
-        </div>
-        <div>
-            <h1 className='comp-card-title'>
-                Description:
-            </h1>
-                <p>
-                    <input className="inputBoxes" value={props.userDescription} onChange={e => props.handleDescriptionChange('description', e.target.value)}/>
-                </p>
+                <input placeholder="Character Name:" className="inputBoxes" value={props.userName} onChange={e => props.handleNameChange('name', e.target.value)}/>
+                <textarea placeholder="describe them" name="text-input" id="chapter-text" cols="30" rows="2" value={props.userInput} onChange={e => props.handleDescriptionChange('description', e.target.value)}></textarea>
+            <div className="cardFiller">
+                <p>Character Name: {props.character.name}</p>
+                <p id="description-value">{props.character.description}</p>
+            </div>
         </div>
         <div className='card-buttons'>
             <button onClick={props.editCard}>edit character</button>
@@ -141,3 +134,6 @@ function Card(props) {
     </div> 
     )
 }
+
+
+{/* <input placeholder="descibe them" className="inputBoxes" value={props.userDescription} onChange={e => props.handleDescriptionChange('description', e.target.value)}/>  */}

@@ -131,7 +131,6 @@ function Card (props) {
         <div className='component-cards'>
         <div className='chap-card'>
             <input placeholder="Chapter Name:" className="inputBoxes" value={props.userDescription} onChange={e => props.handleDescriptionChange('description', e.target.value)}/>
-            {/* <input placeholder="start writing here" className="inputBoxes" value={props.userInput} onChange={e => props.handleChapterChange('input', e.target.value)}/> */}
             <textarea placeholder="start writing here" name="text-input" id="chapter-text" cols="30" rows="2" value={props.userInput} onChange={e => props.handleChapterChange('input', e.target.value)}></textarea>
             <div className="cardFiller" >
                 <p>Chapter Name: {props.chapter.description} </p>
@@ -147,6 +146,7 @@ function Card (props) {
 }
 
 
+{/* <input placeholder="start writing here" className="inputBoxes" value={props.userInput} onChange={e => props.handleChapterChange('input', e.target.value)}/> */}
 // console.log('props: ', props)
 {/* <textarea className="cardFiller" name="cardText" id="ID01" cols="30" rows="10" value={props.chapter.input} > </textarea> */}
 {/* <p> chapter id: {props.chapter.chap_id}</p> */}

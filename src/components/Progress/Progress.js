@@ -12,10 +12,11 @@ class Progress extends Component {
             cardArray: [],
             logNum: 0,
             date: '',
-            inputCount: 0
+            word_count: 0
         }
 
-        this.handleChange = this.handleChange.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleCountChange = this.handleCountChange.bind(this);
         this.createCard = this.createCard.bind(this);
         this.getCards = this.getCards.bind(this);
         this.editCard = this.editCard.bind(this);
@@ -42,9 +43,8 @@ class Progress extends Component {
         .then( (res) => [
             this.setState({
                 cardArray: res.data,
-                logNum: '',
-                inputCount: '',
-                date: ''
+                date: '',
+                word_count: ''
             })
         ])
     }
@@ -66,7 +66,15 @@ class Progress extends Component {
         }) );
     }
 
-    handleChange(prop, val) {
+    handleDateChange(prop, val) {
+        if(val.length < 20) {
+            this.setState({
+                [prop]: val
+            })
+        }
+    }
+
+    handleCountChange(prop, val) {
         if(val.length < 20) {
             this.setState({
                 [prop]: val
@@ -82,9 +90,10 @@ class Progress extends Component {
             progress={el} 
             deleteCard={_=>this.deleteCard(el.log_id)}
             editCard={_=>this.editCard(el.log_id)}
-            handleChange={this.handleChange}
+            handleDateChange={this.handleDateChange}
+            handleCountChange={this.handleCountChange}
             userLogNum={this.state.logNum}
-            userInputCount={this.state.word_count}
+            userword_count={this.state.word_count}
             userDate={this.state.date}/>
         ))
 
@@ -113,20 +122,14 @@ function Card(props) {
     return(
         <div className='component-cards'>
         <div className='prog-card' >
-            <p>Log Entry # </p>
-            <p> log id: {props.progress.log_id}</p>
-            <p className="cardFiller" >{props.progress.word_count}</p>
-            <p className="cardFiller" >{props.progress.date}</p>
-            <input className="inputBoxes" value={props.userLogNum} onChange={e => props.handleChange('logNum', e.target.value)}/>
+                <input placeholder="Date" className="inputBoxes" value={props.userDate} onChange={e => props.handleDateChange('date', e.target.value)}/>
+                <input placeholder="Total word count" className="inputBoxes" value={props.userword_count} onChange={e => props.handleCountChange('word_count', e.target.value)}/>
+                <div className="cardFiller">
+                    <p>{props.progress.date}</p>
+                    <p>{props.progress.word_count}</p>
+                </div>
         </div>
-        <div>
-            <h1 className='comp-card-title'>
-                Date: <input className="inputBoxes" value={props.userDate} onChange={e => props.handleChange('date', e.target.value)}/>
-            </h1>
-                <p>
-                    Word Count: 
-                    <input className="inputBoxes" value={props.userInputCount} onChange={e => props.handleChange('inputCount', e.target.value)}/>
-                </p>
+        <div>    
         </div>
         <div className='card-buttons'>
             <button onClick={props.editCard}>edit log</button>
@@ -134,4 +137,7 @@ function Card(props) {
         </div>
     </div> 
     )
-} 
+}
+
+
+{/* <input className="inputBoxes" value={props.userLogNum} onChange={e => props.handleChange('logNum', e.target.value)}/> */}
