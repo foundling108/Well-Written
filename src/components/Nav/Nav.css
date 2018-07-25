@@ -174,10 +174,17 @@ a
   font-size: 2vw;
 }
 
-/*
- * And let's slide it in from the left
- */
 #menuToggle input:checked ~ ul
 {
   transform: none;
+}
+
+@media (max-width: 425px) {
+  #menu li {
+    font-size: 5vw;
+  }
+
+  .title {
+    font-size: 6vw;
+  }
 }
