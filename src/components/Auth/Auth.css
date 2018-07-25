@@ -2,6 +2,7 @@
     background: whitesmoke ;
     height: 100vh;
     width: 100%;
+    /* overflow-x: none; */
   }
 
   #body {
@@ -21,6 +22,7 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    /* overflow-x: none;  */
   }
 
   .auth-title {
@@ -35,9 +37,12 @@
 
 
   .button-box {
+    position: absolute;
+    /* bottom: 20px;
+    right: 20px; */
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
   }
 
@@ -55,6 +60,16 @@
 
   #logbutton {
   color: black;
+}
+
+
+input {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
   

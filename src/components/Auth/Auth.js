@@ -62,12 +62,10 @@ class Auth extends Component {
             <div className="Header-Auth" id="Auth">
                 <h1 className='auth-title'>idigyo / Words</h1>
                 <div className='auth-input'>
-                    <p>Username:</p>
-                    <input value={this.state.username} onChange={e => this.handleChange('username', e.target.value)}/>
+                    <input placeholder="Username:" value={this.state.username} onChange={e => this.handleChange('username', e.target.value)}/>
                 </div>
                 <div className='auth-input'>
-                    <p>Password:</p>
-                    <input value={this.state.password} type='password' onChange={e => this.handleChange('password', e.target.value)}/>
+                    <input placeholder="Password" value={this.state.password} type='password' onChange={e => this.handleChange('password', e.target.value)}/>
                 </div>
                 <div className="button-box">
                     <button id="darkbuttons" onClick={this.login}> Login </button>

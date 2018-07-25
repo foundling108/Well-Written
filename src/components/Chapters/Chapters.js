@@ -35,7 +35,6 @@ class Chapters extends Component {
     }
 
     getCards() {
-        console.log('get cards')
         axios.get('/api/cards/getChap')
         .then(res => {
             this.setState({
@@ -128,28 +127,26 @@ class Chapters extends Component {
 export default Chapters;
 
 function Card (props) {
-    // console.log('props: ', props)
     return (
         <div className='component-cards'>
         <div className='chap-card'>
-            {/* <p> chapter id: {props.chapter.chap_id}</p> */}
-            <p>Chapter Name: </p>
-            <p className="cardFiller" >Chapter Name: {props.chapter.description}</p>
-            <p className="cardFiller" > {props.chapter.input}</p>
-            <input className="inputBoxes" value={props.userDescription} onChange={e => props.handleDescriptionChange('description', e.target.value)}/>
-        </div>
-        <div>
-            <p>
-                Text:
-            </p>
-                <p>
-                <input className="inputBoxes" value={props.userInput} onChange={e => props.handleChapterChange('input', e.target.value)}/>
-                </p>
-        </div>
+            <input placeholder="Chapter Name:" className="inputBoxes" value={props.userDescription} onChange={e => props.handleDescriptionChange('description', e.target.value)}/>
+            {/* <input placeholder="start writing here" className="inputBoxes" value={props.userInput} onChange={e => props.handleChapterChange('input', e.target.value)}/> */}
+            <textarea placeholder="start writing here" name="text-input" id="chapter-text" cols="30" rows="2" value={props.userInput} onChange={e => props.handleChapterChange('input', e.target.value)}></textarea>
+            <div className="cardFiller" >
+                <p>Chapter Name: {props.chapter.description} </p>
+                <p id="input-value"> {props.chapter.input}</p>
+            </div>
         <div className='card-buttons'>
             <button className="edit-delete" onClick={props.editCard}>edit chapter</button>
             <button className="edit-delete" onClick={props.deleteCard}>delete chapter</button>
         </div>
+        </div>
     </div>
     )
 }
+
+
+// console.log('props: ', props)
+{/* <textarea className="cardFiller" name="cardText" id="ID01" cols="30" rows="10" value={props.chapter.input} > </textarea> */}
+{/* <p> chapter id: {props.chapter.chap_id}</p> */}
