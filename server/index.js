@@ -21,7 +21,7 @@ app.use( session({
     saveUninitialized: true
   }));
 //app.use( checkForSession )
-app.use('/', express.static(__dirname));
+app.use( express.static( `${__dirname}/../build` ) );
 
 massive(process.env.CONNECTION_STRING)
 .then( dbInstance => {
