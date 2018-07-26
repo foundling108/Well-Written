@@ -39,9 +39,15 @@ class Auth extends Component {
     login() {
         axios.post('/api/auth/login', this.state)
         .then(res => {
-            this.props.updateUser(res.data);
-            this.props.history.push('/home');
+            if( res.data === "valid" ) {
+                this.props.updateUser(res.data);
+                this.props.history.push('/home');
+            }
+            else {
+                alert( "username and password do not match" )
+            }
         })
+        .catch(err => console.log(err))
     }
 
     signup() {

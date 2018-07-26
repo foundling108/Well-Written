@@ -1,33 +1,69 @@
 module.exports = {
     
-    signup: ( req, res ) => {
-        const dbInstance = req.app.get('db');
-        const { username, password} = req.body
+    // signup: ( req, res ) => {
+    //     const dbInstance = req.app.get('db');
+    //     const { username, password} = req.body
 
-        dbInstance.users.create_users([ username, password ])
-        .then( ( user ) => {
-            req.session.user = user;
-            res.status(200).send(user.username) })
-        .catch( err => {
-            res.status(500).send({errorMessage: "Catastrophic error!!!"});
-            console.log(err)
-        } );
-    },
+    //     dbInstance.users.create_users([ username, password ])
+    //     .then( ( user ) => {
+    //         req.session.user = user;
+    //         res.status(200).send(user.username) })
+    //     .catch( err => {
+    //         res.status(500).send({errorMessage: "Catastrophic error!!!"});
+    //         console.log(err)
+    //     } );
+    // },
+
+    // login: async( req, res, next ) => {
+    //     const { username, password } = req.body;
+    //     const dbInstance = req.app.get('db');
+    //     const users = await dbInstance.users.get_users()            
+    // const match = users.find( user => user.username === username && user.password === password );
+
+    // if ( match ) {
+    //     req.session.user = match;
+    //     res.status(200).send(req.session.user);
+    // } else {
+    //     res.status(401).send('Go away.');
+    // }
     
-    login: async( req, res, next ) => {
+    // },
+
+    //////////// B-Crypt Hashing //////////////////
+
+    signup: ( req, res, bcrypt ) => {
+        const dbInstance = req.app.get('db');
         const { username, password } = req.body;
-        const dbInstance = req.app.get('db');
-        const users = await dbInstance.users.get_users()            
-    const match = users.find( user => user.username === username && user.password === password );
 
-    if ( match ) {
-        req.session.user = match;
-        res.status(200).send(req.session.user);
-    } else {
-        res.status(401).send('Go away.');
-    }
-    
+        bcrypt.hash(password, null, null, (err, hash) => {
+            dbInstance.users.create_users([username, hash])
+            .then((user) => {
+                req.session.user = user;
+                res.status(200).send(user.username);
+            })
+            .catch(errorMessage => res.status(500).send({errorMessage: "Could not signup"}));
+            console.log(err);
+        })
     },
+
+    login: ( req, res, bcrypt ) => {
+        const dbInstance = req.app.get('db');
+        const { username, password: loginPassword } = req.body;
+        
+        dbInstance.users.read_user([username])
+        .then(( user ) => {
+            let { user_id, password } = user[0];
+            req.session.user = user;
+            bcrypt.compare(loginPassword, password, (error, response) => {
+                (response ? res.send("valid") : res.send("invalid"))
+            })
+        })
+        .catch(err => res.status(500).send(err))
+    },
+
+
+    //////////// B-Crypt Hashing //////////////////
+
 
     logout: (req, res ) => {
         req.session.destroy();

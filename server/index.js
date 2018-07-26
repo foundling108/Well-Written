@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const massive = require('massive');
 const session = require('express-session');
+const bcrypt = require('bcrypt-nodejs');
 require('dotenv').config();
 
 const auth_controller = require('./controller/auth_controller.js');
@@ -29,8 +30,8 @@ massive(process.env.CONNECTION_STRING)
 // development middleware
 app.use(checkForDevelopment)
 // Auth - the login page -
-app.post('/api/auth/signup', auth_controller.signup);
-app.post('/api/auth/login', auth_controller.login);
+app.post('/api/auth/signup', (req, res) =>  auth_controller.signup(req, res, bcrypt));
+app.post('/api/auth/login', (req, res) => auth_controller.login(req, res, bcrypt));
 app.get('/api/auth/logout', auth_controller.logout);
 app.get('/api/auth/getUser', auth_controller.getUser);
 
