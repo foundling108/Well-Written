@@ -137,7 +137,7 @@ function Card (props) {
                 <p id="input-value"> {props.chapter.input}</p>
             </div>
         <div className='card-buttons'>
-            <button className="edit-delete" onClick={props.editCard}>edit chapter</button>
+            <button className="edit-delete" onClick={props.editCard}>save chapter</button>
             <button className="edit-delete" onClick={props.deleteCard}>delete chapter</button>
         </div>
         </div>

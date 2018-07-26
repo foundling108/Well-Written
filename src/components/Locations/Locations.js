@@ -128,7 +128,7 @@ function Card(props) {
             </div>
         </div>
         <div className='card-buttons'>
-            <button onClick={props.editCard}>edit location</button>
+            <button onClick={props.editCard}>save location</button>
             <button onClick={props.deleteCard}>delete location</button>
         </div>
     </div>
