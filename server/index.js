@@ -25,6 +25,7 @@ app.use( express.static( `${__dirname}/../build` ) );
 
 massive(process.env.CONNECTION_STRING)
 .then( dbInstance => {
+    console.log("db connected")
     app.set('db', dbInstance)
 }).catch( err => console.log(err) );
 // development middleware
