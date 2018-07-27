@@ -2,13 +2,16 @@
     background: whitesmoke ;
     height: 100vh;
     width: 100%;
+    overflow-x: none;
+    background-repeat: no-repeat;
+    background-size: contain; 
   }
   
   .Header {
     background: grey;
     position: absolute;
     top: 0;
-    width: 100%;
+    width: 100vw;
     height: 25vh;
     border: solid black 1px;
     border-radius: 25px;
@@ -20,7 +23,7 @@
   }
 
   .add-button {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     right: 20px;
     border: solid black 5px;
@@ -97,6 +100,21 @@
     border: 1px solid;
     border-radius: 4px;
     padding: 5px 5px;
+  }
+
+  @media (max-width: 425px) {
+    .component-cards {
+      height: 25vh;
+    }
+    .inputBoxes {
+      position: relative;
+      left: 8px;
+      width: 90%;
+    }
+    .cardFiller {
+      top: 50%;
+      left: 40%;
+    }
   }
 
 

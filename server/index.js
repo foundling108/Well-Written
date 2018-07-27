@@ -27,7 +27,7 @@ massive(process.env.CONNECTION_STRING)
 .then( dbInstance => {
     console.log("db connected")
     app.set('db', dbInstance)
-}).catch( err => console.log(err) );
+}).catch( err => console.log("Massive", err) );
 // development middleware
 app.use(checkForDevelopment)
 // Auth - the login page -

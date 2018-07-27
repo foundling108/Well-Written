@@ -41,14 +41,15 @@ module.exports = {
                 req.session.user = user;
                 res.status(200).send(user.username);
             })
-            .catch(errorMessage => res.status(500).send({errorMessage: "Could not signup"}));
-            console.log(err);
+            .catch(err => res.status(500).send(err));
+            // console.log(err);
         })
     },
 
     login: ( req, res, bcrypt ) => {
         const dbInstance = req.app.get('db');
         const { username, password: loginPassword } = req.body;
+        //const match = users.find( user => user.username === username && user.password === password );
         
         dbInstance.users.read_user([username])
         .then(( user ) => {
