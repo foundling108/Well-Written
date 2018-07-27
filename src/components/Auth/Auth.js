@@ -20,6 +20,35 @@ class Auth extends Component {
 
     }
 
+    // newUser = () => {
+    //     let {username, password} = this.state;
+    //     axios.get('/api/auth/get_users')
+    //         .then(usernames => {
+    //             let nameArray = usernames.data.map(val => {
+    //                 return val.username
+    //             })
+    //             //Check to see if username already exists in the database
+    //             if(nameArray.indexOf(username) === -1){
+    //                 axios.post('/api/auth/create_user', {username: username, password: password})
+    //                     .then( () => {
+    //                         //Set the username and password fields to be blank
+    //                         this.setState({
+    //                         username: '',
+    //                         password: ''
+    //                         })
+    //                     })
+    //                     .catch(err => {
+    //                         console.log("Unable to create new user.",err)
+    //                     });
+    //             }  else{
+    //                 alert("This username is already taken.")
+    //             }
+    //         })
+    //         .catch(err => {
+    //             console.log("Unable to access username info.", err)
+    //         })
+    // }
+
     componentDidMount() {
         axios.get('/api/getUnsplash')
         .then( res => {
