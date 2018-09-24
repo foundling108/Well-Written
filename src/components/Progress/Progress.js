@@ -139,5 +139,3 @@ function Card(props) {
     )
 }
 
-
-{/* <input className="inputBoxes" value={props.userLogNum} onChange={e => props.handleChange('logNum', e.target.value)}/> */}

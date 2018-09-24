@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import axios from 'axios';
-
-import { logout } from './../../dux/reducer';
 
 import './Nav.css';
 
@@ -15,7 +12,7 @@ class Nav extends Component {
     }
 
     logout() {
-        axios.get('/api/auth/logout')
+        axios.post('/auth/logout')
         .then( ()=>{
             this.props.history.push('/');
         })
@@ -61,8 +58,7 @@ class Nav extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return state;
-}
+    export default withRouter(Nav);
 
-    export default withRouter(connect(mapStateToProps, {logout}) (Nav));
+    // import { logout } from './../../dux/reducer';
+    // import { connect } from 'react-redux';

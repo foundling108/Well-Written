@@ -133,6 +133,3 @@ function Card(props) {
     </div> 
     )
 }
-
-
-{/* <input placeholder="descibe them" className="inputBoxes" value={props.userDescription} onChange={e => props.handleDescriptionChange('description', e.target.value)}/>  */}

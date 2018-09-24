@@ -145,8 +145,3 @@ function Card (props) {
     )
 }
 
-
-{/* <input placeholder="start writing here" className="inputBoxes" value={props.userInput} onChange={e => props.handleChapterChange('input', e.target.value)}/> */}
-// console.log('props: ', props)
-{/* <textarea className="cardFiller" name="cardText" id="ID01" cols="30" rows="10" value={props.chapter.input} > </textarea> */}
-{/* <p> chapter id: {props.chapter.chap_id}</p> */}
