@@ -27,7 +27,6 @@ class Characters extends Component {
     }
 
     getCards() {
-        console.log('get cards')
         axios.get('/api/cards/getChar')
         .then(res => {
             this.setState({
