@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { getUserData } from './../../dux/reducer';
-import { connect } from 'react-redux';
 import './Home.css';
 
 class Home extends Component {
@@ -10,16 +8,24 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            username: ''
+            userInfo: [],
+            user_id: '',
+            user_image: '',
+            first_name: '',
+            last_name: ''
         }
     }
 
     componentDidMount() {
-        axios.get('/api/auth/getUser')
-        .then( res => {
-            if( !res.data ) {
-                this.props.history.push('/');
-            }
+        axios.get('/api/displayUser')
+        .then(res => {
+            this.setState({
+                userInfo: res.data,
+                user_id: res.data[0].user_id,
+                user_image: res.data[0].user_image,
+                first_name: res.data[0].first_name,
+                last_name: res.data[0].last_name
+            })
         })
     }
 
@@ -27,12 +33,11 @@ class Home extends Component {
     render() {
         return(
 
-        <div className="Body">
+        <div className="home-body">
             <div className="Header" id="Home">
                 idigyo / Words
                 <div>
                     <h2 id="user">
-                        {this.props.user.username ? this.props.user.username : null}
                     </h2>
                 </div>
             </div>
@@ -98,10 +103,5 @@ class Home extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        user: state.user
-    };
-}
 
-export default connect(mapStateToProps, { getUserData }) (Home);
+export default Home;

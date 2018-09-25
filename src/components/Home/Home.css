@@ -1,158 +1,154 @@
-.Body {
-    background: whitesmoke cover;
-    height: 100vh;
-    width: 100%;
-    overflow-x: none;
-    background-repeat: no-repeat;
-    background-size: contain; 
+.home-body {
+    background: whitesmoke;
+    background-size: cover;
   }
   
-  .Header {
-    background: grey;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 25vh;
-    border: solid black 1px;
-    border-radius: 25px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    font-size: 7vw;
-    color: whitesmoke;
-  }
+.Header {
+  background: grey;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 25vh;
+  border: solid black 1px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 7vw;
+  color: whitesmoke;
+}
 
-  #Home {
-    background: rgb(60, 22, 201);
-  }
+#Home {
+  background: rgb(60, 22, 201);
+}
 
-  #user {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1vw;
-    color: black;
-  }
+#user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1vw;
+  color: black;
+}
 
-  .cards {
-    margin-top: 290px;
-  }
+.cards {
+  margin-top: 290px;
+}
 
-  .component-cards {
-    position: relative;
-    margin: 35px auto;
-    top: 25px;
-    display: block;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* padding: 50px; */
-    height: 15vh;
-    width: 70%;
-    border: solid black 5px;
-    border-radius: 25px;
-  }
+.component-cards {
+  position: relative;
+  margin: 35px auto;
+  top: 25px;
+  display: block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* padding: 50px; */
+  height: 15vh;
+  width: 70%;
+  border: solid black 5px;
+  border-radius: 25px;
+}
 
-  .box-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+.box-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  h1 {
-    font-size: 5vw;
-  }
+h1 {
+  font-size: 5vw;
+}
 
-  .comp-card-title {
-    font-size: 3vw;
-  }
+.comp-card-title {
+  font-size: 3vw;
+}
 
 
-  .color-card {
-    position: absolute;
-    margin: 0 0 0 0;
-    display: grid;
-    flex-direction: row;
-    height: 14vh;
-    width: 20%;
-    border: solid grey 5px;
-    border-radius: 25px;
-  }
+.color-card {
+  position: absolute;
+  margin: 0 0 0 0;
+  display: grid;
+  flex-direction: row;
+  height: 14vh;
+  width: 20%;
+  border: solid grey 5px;
+  border-radius: 25px;
+}
 
-  button {
-    
-    border: none;
-    border-radius: 25px;
-    background: none;
-    
-  }
+button {
+  
+  border: none;
+  border-radius: 25px;
+  background: none;
+  
+}
 
-  a {
-    display: grid;
-  }
+a {
+  display: grid;
+}
 
-  #chapbox {
-    color: rgb(30, 140, 243);
-  }
+#chapbox {
+  color: rgb(30, 140, 243);
+}
 
+#chaptbox {
+  border: solid rgb(30, 140, 243) 5px;
+}
+
+#charbox {
+  color: rgb(138, 24, 138);
+}
+
+#charabox {
+  border: solid rgb(138, 24, 138) 5px;
+}
+
+#progbox {
+  color: rgb(233, 51, 51);
+}
+
+#progrbox {
+  border: solid rgb(233, 51, 51) 5px;
+}
+
+#locbox {
+  color: rgb(228, 142, 29);
+}
+
+#locabox {
+  border: solid rgb(228, 142, 29) 5px;
+}
+
+@media (max-width: 425px) {
   #chaptbox {
-    border: solid rgb(30, 140, 243) 5px;
-  }
-
-  #charbox {
-    color: rgb(138, 24, 138);
+    width: 97%;
+    height: 50%;
+    position: absolute;
+    bottom: 0%;
   }
 
   #charabox {
-    border: solid rgb(138, 24, 138) 5px;
-  }
-
-  #progbox {
-    color: rgb(233, 51, 51);
+    width: 97%;
+    height: 50%;
+    position: absolute;
+    bottom: 0%;
   }
 
   #progrbox {
-    border: solid rgb(233, 51, 51) 5px;
-  }
-
-  #locbox {
-    color: rgb(228, 142, 29);
+    width: 97%;
+    height: 50%;
+    position: absolute;
+    bottom: 0%;
   }
 
   #locabox {
-    border: solid rgb(228, 142, 29) 5px;
+    width: 97%;
+    height: 50%;
+    position: absolute;
+    bottom: 0%;
   }
-
-  @media (max-width: 425px) {
-    #chaptbox {
-      width: 97%;
-      height: 50%;
-      position: absolute;
-      bottom: 0%;
-    }
-
-    #charabox {
-      width: 97%;
-      height: 50%;
-      position: absolute;
-      bottom: 0%;
-    }
-
-    #progrbox {
-      width: 97%;
-      height: 50%;
-      position: absolute;
-      bottom: 0%;
-    }
-
-    #locabox {
-      width: 97%;
-      height: 50%;
-      position: absolute;
-      bottom: 0%;
-    }
-  }
+}
 
   

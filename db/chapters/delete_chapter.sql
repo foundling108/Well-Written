@@ -1,3 +1,4 @@
 DELETE FROM chapters
-WHERE chap_id = $1;
+WHERE user_id = $1
+AND chap_id = $2;
 SELECT * FROM chapters;

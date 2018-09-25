@@ -61,15 +61,17 @@ app.get('/auth/callback', async (req, res) => {
 
     let userData = await axios.get(`https://${REACT_APP_DOMAIN}/userinfo?access_token=${responseWithToken.data.access_token}`);
 
+    let isPremium = false;
+
     const db = req.app.get('db');
     const { sub, picture, given_name, family_name } = userData.data;
-    console.log('1111', userData.data)
+   
 
     let userExists = await db.users.find_user([sub]);
     if (userExists[0]) {
       req.session.user = userExists[0];
     } else {
-      let createdUser = await db.users.create_user([sub, picture, given_name, family_name]);
+      let createdUser = await db.users.create_user([sub, picture, given_name, family_name, isPremium]);
       req.session.user = createdUser[0]
     }
     res.redirect('http://localhost:3000/#/home')
@@ -79,6 +81,8 @@ app.get('/auth/callback', async (req, res) => {
 // Auth - the login page -
 app.get('/api/getUser', auth_controller.getUser);
 app.post('/auth/logout', auth_controller.logout);
+
+app.get('/api/displayUser', auth_controller.displayUser)
 
 // Create a card controller that checks the users location (home, chapters, etc.) and app.whatevers the method depending on that. //
 ////// Cards - for each component -
