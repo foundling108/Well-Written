@@ -23,9 +23,9 @@ class Progress extends Component {
         this.deleteCard = this.deleteCard.bind(this);
     }
 
-    componentDidMount() {
-        this.getCards();
-    }
+    // componentDidMount() {
+    //     this.getCards();
+    // }
 
     getCards() {
         console.log('get cards')
@@ -84,58 +84,23 @@ class Progress extends Component {
 
 
     render() {
-        let cards = this.state.cardArray.map((el, i)=>(
-            <Card 
-            key={i}
-            progress={el} 
-            deleteCard={_=>this.deleteCard(el.log_id)}
-            editCard={_=>this.editCard(el.log_id)}
-            handleDateChange={this.handleDateChange}
-            handleCountChange={this.handleCountChange}
-            userLogNum={this.state.logNum}
-            userword_count={this.state.word_count}
-            userDate={this.state.date}/>
-        ))
-
         return(
 
-            <div className="Body">
-            <div className="Header" id="Progress">
+            <div className="proress-body">
+            <div className="progress-header">
                 Writing Progress  
             </div>
                 
                 <section className='cards'>
                    
-                    {cards}
+
                     
                 </section>
 
-            <button className='add-button' onClick={this.createCard}>+</button>
+            <button className='addButton' onClick={this.createCard}>+</button>
         </div>
         )
     }
 }
 
 export default Progress;
-
-function Card(props) {
-    return(
-        <div className='component-cards'>
-        <div className='prog-card' >
-                <input placeholder="Date" className="inputBoxes" value={props.userDate} onChange={e => props.handleDateChange('date', e.target.value)}/>
-                <input placeholder="Total word count" className="inputBoxes" value={props.userword_count} onChange={e => props.handleCountChange('word_count', e.target.value)}/>
-                <div className="cardFiller">
-                    <p>{props.progress.date}</p>
-                    <p>{props.progress.word_count}</p>
-                </div>
-        </div>
-        <div>    
-        </div>
-        <div className='card-buttons'>
-            <button onClick={props.editCard}>save log</button>
-            <button onClick={props.deleteCard}>delete log</button>
-        </div>
-    </div> 
-    )
-}
-

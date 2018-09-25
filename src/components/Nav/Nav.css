@@ -181,4 +181,8 @@
   .nav-title {
     font-size: 6vw;
   }
+
+  .span-span{
+    bottom: 60px;
+  }
 }

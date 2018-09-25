@@ -1,120 +1,22 @@
-.Body {
-    background: whitesmoke ;
-    height: 100vh;
-    width: 100%;
-    overflow-x: none;
-    background-repeat: no-repeat;
-    background-size: contain; 
-  }
-  
-  .Header {
-    background: grey;
-    position: absolute;
-    top: 0;
-    width: 100vw;
-    height: 25vh;
-    border: solid black 1px;
-    border-radius: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 7vw;
-    color: whitesmoke;
-  }
+.chapters-body {
+  background: whitesmoke ;
+  height: 100vh;
+  width: 100%;
+  overflow-x: none;
+  background-repeat: no-repeat;
+  background-size: contain; 
+}
 
-  .add-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    border: solid black 5px;
-    border-radius: 50%;
-    font-size: 5vw;
-    width: 7%;
-    color: black;
-    background: whitesmoke;
-    transition-duration: 1s;
-  }
-
-  .add-button:hover {
-    background: black;
-    color: whitesmoke;
-  }
-
-  #Chapters {
-    background: rgb(30, 140, 243);
-  }
-
-  .inputBoxes {
-    margin: 1vw;
-    display: flex;
-    flex-direction: column;
-    
-  }
-
-  .cardFiller {
-    position: absolute;
-    top: 10px;
-    left: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-content: space-around;
-    margin-top: 10px;
-    padding: 10px;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center; */
-  }
-  
-  #input-value {
-    width: 10vw;
-    border: 1px solid;
-    border-radius: 4px;
-    padding: 2px 5px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  #editbutton {
-    position: absolute;
-    bottom: 20px;
-    right: 10px;
-  }
-
-  .card-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: absolute;
-    bottom: 20px;
-    right: 10px;
-
-  }
-
-  #chapter-text {
-    position: relative;
-    left: 1vw;
-    width: 10vw;
-    border: 1px solid;
-    border-radius: 4px;
-    padding: 5px 5px;
-  }
-
-  @media (max-width: 425px) {
-    .component-cards {
-      height: 25vh;
-    }
-    .inputBoxes {
-      position: relative;
-      left: 8px;
-      width: 90%;
-    }
-    .cardFiller {
-      top: 50%;
-      left: 15%;
-    }
-  }
-
+.chapters-header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 7vw;
+  background: rgb(19, 117, 15);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
 
