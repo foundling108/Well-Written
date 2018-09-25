@@ -1,153 +1,90 @@
 .home-body {
     background: whitesmoke;
     background-size: cover;
+    overflow: hidden;
   }
   
-.Header {
-  background: grey;
+.Home-header {
   position: absolute;
   top: 0;
-  width: 100%;
+  width: stretch;
   height: 25vh;
-  border: solid black 1px;
-  border-radius: 25px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   font-size: 7vw;
   color: whitesmoke;
+  background: rgb(19, 117, 15);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
-#Home {
-  background: rgb(60, 22, 201);
+#user-image {
+  border-radius: 50%;
+  width: 20%;
 }
 
 #user {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1vw;
-  color: black;
+  font-size: 7vw;
+  color: whitesmoke;
 }
 
-.cards {
-  margin-top: 290px;
-}
-
-.component-cards {
-  position: relative;
-  margin: 35px auto;
-  top: 25px;
-  display: block;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* padding: 50px; */
-  height: 15vh;
-  width: 70%;
-  border: solid black 5px;
-  border-radius: 25px;
-}
-
-.box-content {
+.home-cards {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  width: 80%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  /* border: lightseagreen solid 2px; */
 }
 
-h1 {
-  font-size: 5vw;
+.home-component-cards {
+  margin: 1% 2% 2% 2%;
+  height: 15vh;
+  width: 40%;
 }
-
-.comp-card-title {
-  font-size: 3vw;
-}
-
 
 .color-card {
-  position: absolute;
-  margin: 0 0 0 0;
-  display: grid;
-  flex-direction: row;
-  height: 14vh;
-  width: 20%;
-  border: solid grey 5px;
-  border-radius: 25px;
-}
-
-button {
-  
   border: none;
-  border-radius: 25px;
-  background: none;
-  
+  background: linear-gradient(128deg, rgba(64, 61, 57, 0.1), rgba(255, 255, 255, 0.2));;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  color: rgb(60, 22, 201);
+  font-size: 3vw;
+  height: 100%;
+  width: 100%;
 }
 
-a {
-  display: grid;
+.color-card:hover {
+  box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 8.5px 25px 0 rgba(0,0,0,0.19);
 }
 
-#chapbox {
-  color: rgb(30, 140, 243);
-}
-
-#chaptbox {
-  border: solid rgb(30, 140, 243) 5px;
-}
-
-#charbox {
-  color: rgb(138, 24, 138);
-}
-
-#charabox {
-  border: solid rgb(138, 24, 138) 5px;
-}
-
-#progbox {
-  color: rgb(233, 51, 51);
-}
-
-#progrbox {
-  border: solid rgb(233, 51, 51) 5px;
-}
-
-#locbox {
-  color: rgb(228, 142, 29);
-}
-
-#locabox {
-  border: solid rgb(228, 142, 29) 5px;
+.button-text {
+  font-size: 1vw;
 }
 
 @media (max-width: 425px) {
-  #chaptbox {
-    width: 97%;
-    height: 50%;
-    position: absolute;
-    bottom: 0%;
+  .home-cards {
+    justify-content: center;
   }
 
-  #charabox {
-    width: 97%;
-    height: 50%;
-    position: absolute;
-    bottom: 0%;
+  .home-component-cards{
+    width: 100%;
+    height: 80px;
+  }
+}
+
+@media (max-width: 786px) {
+  .color-card {
+    font-size: 5vw;
   }
 
-  #progrbox {
-    width: 97%;
-    height: 50%;
-    position: absolute;
-    bottom: 0%;
-  }
-
-  #locabox {
-    width: 97%;
-    height: 50%;
-    position: absolute;
-    bottom: 0%;
+  .button-text {
+    font-size: 3vw;
   }
 }
 

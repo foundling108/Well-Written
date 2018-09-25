@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Home.css';
 
@@ -29,71 +28,81 @@ class Home extends Component {
         })
     }
 
+    toProgress = () => {
+        this.props.history.push('/progress')
+    }
+
+    toChapters = () => {
+        this.props.history.push('/chapters')
+    }
+
+    toCharacters = () => {
+        this.props.history.push('/characters')
+    }
+
+    toLocations = () => {
+        this.props.history.push('/locations')
+    }
 
     render() {
         return(
 
         <div className="home-body">
-            <div className="Header" id="Home">
-                idigyo / Words
-                <div>
-                    <h2 id="user">
-                    </h2>
-                </div>
+            <div className="Home-header">
+                <img id='user-image' src={this.state.user_image} alt="you"/>
+                <h2 id="user">
+                    {this.state.first_name}
+                </h2>
             </div>
 
-            <section className='cards'>
-                <div className='component-cards'>
-                    <div className='color-card' id='chaptbox'>
-                        <Link to='/chapters'><button id='chapbox'>Chapters</button></Link>
-                    </div>
-                    <div className='box-content'>
-                        <h1>
-                            Write
-                        </h1>
-                            <p>
-                                + create new chapters
+            <section className='home-cards'>
+                <div className='home-component-cards'>
+                        <button className='color-card' onClick={this.toProgress}>
+                            Writing Progress
+                            <p className='button-text'>
+                                -Track Progress-
                             </p>
-                    </div>
+                        </button>
                 </div>
-                <div className='component-cards'>
-                    <div className='color-card' id='progrbox'>
-                    <Link to='/progress'><button id='progbox'>Writing Progress</button></Link>
-                    </div>
-                    <div className='box-content'>
-                        <h1>
-                            Track Progress
-                        </h1>
-                            <p>
-                                + create new log
+                <div className='home-component-cards'>
+                        <button className='color-card'>
+                            Timeline
+                            <p className='button-text'>
+                                -Create Event-
                             </p>
-                    </div>
+                        </button>
                 </div>
-                <div className='component-cards'>
-                    <div className='color-card' id='charabox'>
-                    <Link to='/characters'><button id='charbox'>Characters</button></Link>
-                    </div>
-                    <div className='box-content'>
-                        <h1>
-                            Who's Who
-                        </h1>
-                            <p>
-                                + create new characters
+                <div className='home-component-cards'>
+                        <button className='color-card' onClick={this.toChapters}>
+                            Chapters
+                            <p className='button-text'>
+                                -Write or Link-
                             </p>
-                    </div>
+                        </button>
                 </div>
-                <div className='component-cards'>
-                    <div className='color-card' id='locabox'>
-                    <Link to='/locations'><button id='locbox'>Locations</button></Link>
-                    </div>
-                    <div className='box-content'>
-                        <h1>
-                            Where's Where
-                        </h1>
-                            <p>
-                                + create new locations
+                <div className='home-component-cards'>
+                        <button className='color-card' onClick={this.toCharacters}>
+                            Characters
+                            <p className='button-text'>
+                                -Create Character-
                             </p>
-                    </div>
+                        </button>
+                </div>
+                <div className='home-component-cards'>
+                        <button className='color-card' onClick={this.toLocations}>
+                            Locations
+                            <p className='button-text'>
+                                -Create Location-
+                            </p>
+                        </button>
+                </div>
+                <div className='home-component-cards'>
+                        <button className='color-card'>
+                            Notes
+                            <p className='button-text'>
+                                -Things to Remember-
+                            </p>
+                        </button>
                 </div>
             </section>
 

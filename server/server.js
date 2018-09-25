@@ -9,6 +9,7 @@ const axios = require('axios');
 const auth_controller = require('./controller/auth_controller.js');
 const card_controller = require('./controller/card_controller.js');
 const unsplash_controller = require('./controller/unsplash_contoller.js');
+const checkForSession = require('./middlewares/checkForSession.js');
 
 const app = express();
 
@@ -21,20 +22,22 @@ let {
     SESSION_SECRET,
     ENVIRONMENT
   } = process.env;
+  
+  app.use( session({
+      secret: SESSION_SECRET,
+      resave: false,
+      saveUninitialized: false
+    }));
 
 app.use(bodyParser.json());
+app.use(checkForSession);
 
 massive(CONNECTION_STRING)
-.then( dbInstance => {
-    app.set('db', dbInstance)
+.then( db => {
+    app.set('db', db)
     console.log("db connected")
 }).catch( err => console.log("Massive", err) );
 
-app.use( session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
-  }));
 
   app.use((req, res, next) => {
     if (ENVIRONMENT === 'dev') {
@@ -66,7 +69,6 @@ app.get('/auth/callback', async (req, res) => {
     const db = req.app.get('db');
     const { sub, picture, given_name, family_name } = userData.data;
    
-
     let userExists = await db.users.find_user([sub]);
     if (userExists[0]) {
       req.session.user = userExists[0];

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
 import './Nav.css';
@@ -16,6 +16,26 @@ class Nav extends Component {
         .then( ()=>{
             this.props.history.push('/');
         })
+        }
+
+        toHome = () => {
+            this.props.history.push('/home')
+        }
+
+        toProgress = () => {
+            this.props.history.push('/progress')
+        }
+    
+        toChapters = () => {
+            this.props.history.push('/chapters')
+        }
+    
+        toCharacters = () => {
+            this.props.history.push('/characters')
+        }
+    
+        toLocations = () => {
+            this.props.history.push('/locations')
         }
     
 
@@ -35,19 +55,22 @@ class Nav extends Component {
                 <span></span>
                 
 
-                    <ul id="menu">
-                            <div className="title">
-                                Well-Written
+                    <ul className="menu">
+                            <div className="nav-title">
+                                Words
                             </div>
-                        <span></span>
-                        <Link to='/home'><a id="hom"><li>HOME</li></a></Link>
-                        <span></span>
-                        <Link to='/chapters'><a id="chap"><li>CHAPTERS</li></a></Link>
-                        <Link to='/progress'><a id="pro"><li>PROGRESS</li></a></Link>
-                        <Link to='/characters'><a id="char"><li>CHARACTERS</li></a></Link>
-                        <Link to='/locations'><a id="loc"><li>LOCATIONS</li></a></Link>
-                        <span></span>
-                        <a id="logout"><li onClick={this.logout}>LOGOUT</li></a>
+                        <li id='nav-home' onClick={this.toHome}>HOME</li>
+                        <hr className='span-span'></hr>
+                        <li id="pro" onClick={this.toProgress}>PROGRESS</li>
+                        <li>TIMELINE</li>
+                        <li id="chap" onClick={this.toChapters}>CHAPTERS</li>
+                        <li id="char" onClick={this.toCharacters}>CHARACTERS</li>
+                        <li id="loc" onClick={this.toLocations}>LOCATIONS</li>
+                        <li>NOTES</li>
+                        <hr className='span-span'></hr>
+                        <li>CREDITS</li>
+                        <li id="logout" onClick={this.logout}>LOGOUT</li>
+                        <li>GO PREMIUM</li>
                     </ul>
               </div>
             </nav>
