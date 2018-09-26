@@ -1,3 +1,7 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
 .chapters-body {
   background: whitesmoke ;
   height: 100vh;
@@ -19,4 +23,27 @@
   background: rgb(19, 117, 15);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
+
+.content-cards {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  width: 70%;
+  height: 60%; 
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  overflow: scroll;
+  border: solid seagreen 2px;
+}
+
+.the-cards {
+  background: linear-gradient(128deg, rgba(64, 61, 57, 0.1), rgba(255, 255, 255, 0.2));
+  box-shadow: 0 7px 14px 0 rgba(0, 0, 0, 0.25), 0 5px 5px 0 rgba(0, 0, 0, 0.26);
+  margin-bottom: 1%;
+  height: 20%;
+  border: lightblue solid 2px;
+}
+
+
 

@@ -90,11 +90,7 @@ app.get('/api/displayUser', auth_controller.displayUser)
 ////// Cards - for each component -
 
 // Chapter cards
- app.post('/api/cards/createChap', card_controller.createChapter);
- app.get('/api/cards/getChap', card_controller.getChapter);
-// app.get('/api/cards/getAllChaps', card_controller.getAllChapters);
- app.put('/api/cards/updateChap' ,card_controller.updateChapter);
- app.delete('/api/cards/deleteChap/:id', card_controller.deleteChapter);
+app.get('/api/getChapters', card_controller.getChapters)
 
 // // Location cards
  app.post('/api/cards/createLoc', card_controller.createLocation);
@@ -125,8 +121,3 @@ app.get('/api/getUnsplash', unsplash_controller.getUnsplash);
 
 
 app.listen( SERVER_PORT, () => { console.log(`Listening on port ${SERVER_PORT}`); });
-
-// app.post('/api/auth/signup', (req, res) =>  auth_controller.signup(req, res, bcrypt));
-// app.post('/api/auth/login', (req, res) => auth_controller.login(req, res, bcrypt));
-// app.get('/api/auth/logout', auth_controller.logout);
-// app.get('/api/auth/getUser', auth_controller.getUser);
