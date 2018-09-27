@@ -21,7 +21,11 @@ class Chapters extends Component {
         axios.get('/api/getChapters')
         .then(res => {
             this.setState({
-                cardsToDisplay: res.data
+                cardsToDisplay: res.data,
+                user_id: res.data[0].user_id,
+                chapter_id: res.data[0].chapter_id,
+                chapter_title: res.data[0].chapter_title,
+                chapter_content: res.data[0].chapter_content
             })
         })
     }
@@ -31,16 +35,26 @@ class Chapters extends Component {
         const cards = this.state.cardsToDisplay.map((el, i) => {
             return(
                 <div className="the-cards" key={el + i}>
-                    <div className="title-div">
-                        <h3 className="the-h3">{el.chapter_title}</h3>
-                    </div>
-                    <hr/>
-                    <button className="card-buttons" id='delete-button' onClick={() => {this.deleteCard(el.chapter_id)}}>X</button>
-                        <div className="content-div">
-                            <p className="content-ptag">{el.chapter_content}</p>
+                    <div className='left-content'>
+                        <div className="title-div">
+                            <div className='id-div'>
+                                <p>Chapter</p>
+                                <input className="the-id" name='chapter_id' type="text" value={el.chapter_id} onChange={this.onSave}/>
+                            </div>
+                            <input className="the-title" name='chapter_title' type="text" value={el.chapter_title} onChange={this.onSave}/>
                         </div>
-                    <button className="card-buttons" id="edit-button" onClick={() => {this.editCard(el.chapter_id)}}>EDIT</button>
-                    <button className="card-buttons" id="cancel-button" onClick={() => {this.cancelEdit(el.chapter_id)}}>CANCEL</button>
+                    </div>
+                    <hr className='the-line'/>
+                    <div className='right-content'>
+                        <button className="card-buttons" id='delete-button' onClick={() => {this.deleteCard(el.chapter_id)}}>X</button>
+                        <div className="content-div">
+                            <input className="the-content" name='chapter_content' type="text" value={el.chapter_content} onChange={this.onSave}/>
+                        </div>
+                        <div className='edit-save-cancel'>
+                            <button className="card-buttons" id="edit-button" onClick={() => {this.editCard(el.chapter_id)}}>EDIT</button>
+                            <button className="card-buttons" id="cancel-button" onClick={() => {this.cancelEdit(el.chapter_id)}}>CANCEL</button>
+                        </div>
+                    </div>
                 </div>
             )
         })
