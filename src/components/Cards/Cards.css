@@ -1,53 +1,111 @@
-.cards {
-    margin-top: 290px;
-  }
+.content-cards {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  width: 70%;
+  height: 60%; 
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  overflow: scroll;
+  border: solid seagreen 2px;
+}
 
-.component-cards {
-    position: relative;
-    margin: 35px auto;
-    top: 25px;
-    display: block;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* padding: 50px; */
-    height: 15vh;
-    width: 70%;
-    border: solid black 5px;
-    border-radius: 25px;
-  }
+.the-cards {
+  background: linear-gradient(128deg, rgba(64, 61, 57, 0.1), rgba(255, 255, 255, 0.2));
+  box-shadow: 0 7px 14px 0 rgba(0, 0, 0, 0.25), 0 5px 5px 0 rgba(0, 0, 0, 0.26);
+  margin-bottom: 1%;
+  height: 15vh;
+  display: flex;
+  align-content: flex-start;
+}
 
-.box-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+.left-content{
+  width: 18%;
+  margin-right: 3%;
+}
 
-h1 {
-    font-size: 5vw;
-  }
+.title-div{
+  height: 100%;
+}
 
+.id-div{
+  display: flex;
+  margin: 2%;
+  /* border: solid black 2px; */
+}
 
-.color-card {
-    position: absolute;
-    margin: 0 0 0 0;
-    display: grid;
-    flex-direction: row;
-    height: 14vh;
-    width: 20%;
-    border: solid grey 5px;
-    border-radius: 25px;
-  }
+.id-div p {
+  font-size: 2vw;
+  margin: 1% 1% 1% 1%;
+}
 
-button {
-    
-    border: none;
-    border-radius: 25px;
-    background: none;
-    
-  }
+.the-id{
+  width: 2vw;
+  font-size: 2vw;
+  padding: 0 0 0 2%;
+}
 
-a {
-    display: grid;
-  }
+.the-title{
+  font-size: 1vw;
+  width: 80%;
+  height: 20%;
+  position: relative;
+  left: 10%;
+  /* border: solid rgb(130, 231, 238) 2px; */
+}
+
+.the-line{
+  position: absolute;
+  left: 20%;
+  background: black;
+  border: none;
+  width: 2px;
+  height: 22%;
+}
+
+.right-content {
+  width: 79%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* border: solid gold 2px; */
+}
+/* 
+.content-div {
+  border: solid pink 2px;
+} */
+
+.the-content{
+  font-size: 1vw;
+  width: 90%;
+}
+
+.card-buttons{
+  height: 2vw;
+  font-size: 1vw;
+  background: inherit;
+  border: none;
+  /* border: solid violet 2px; */
+}
+
+.card-buttons:hover{
+  color: rgb(60, 22, 201);
+  cursor: pointer;
+}
+
+#delete-button {
+  width: 2vw;
+  position: relative;
+  left: 96.5%;
+}
+
+.edit-save-cancel {
+  width: 9vw;
+  position: relative;
+  right: -83%;
+}
+
+#cancel-button{
+  margin-left: 2%;
+}

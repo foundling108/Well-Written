@@ -6,106 +6,41 @@ class Cards extends Component {
         super(props);
 
         this.state = {
-            cardArray: [],
-            name: '',
-            description: '',
-            input: '',
-            inputCount: 0,
-            date: '',
-            logNum: 0
+            editable: false  
         }
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-        this.handleChapter = this.handleChapter.bind(this);
-
     }  
 
-    componentDidMount() {
-        //map over the card array and mount to the appropriate component on the button 'Add Card'
-    }
-
-    handleChange(prop, val) {
-        if(val.length < 20) {
-            this.setState({
-                [prop]: val
-            })
-        }
-    }
-
-    handleNameChange(prop, val) {
-        if(val.length < 80) {
-            this.setState({
-                [prop]: val
-            })
-        }
-    }
-
-    handleDescriptionChange(prop, val) {
-        if(val.length < 180) {
-            this.setState({
-                [prop]: val
-            })
-        }
-    }
-
-    handleChapter(prop, val) {
-        if(val.length < 5000) {
-            this.setState({
-                [prop]: val
-            })
-        }
-    }
+    
 
     render() {
         return(
-            <section className='cards'>
-                <div className='component-cards'>
-                    <div className='char+loc-card'>
-                        <p>Name:</p>
-                        <input value={this.state.name} onChange={e => this.handleNameChange('name', e.target.value)}/>
+            <div className="the-cards" key={el + i}>
+                    <div className='left-content'>
+                        <div className="title-div">
+                            <div className='id-div'>
+                                <input className="the-id" name='chapter_id' type="text" value={el.chapter_id} onChange={this.onUpdate}/>
+                            </div>
+                            <input className="the-title" name='chapter_title' type="text" value={el.chapter_title} onChange={this.onUpdate}/>
+                        </div>
                     </div>
-                    <div>
-                        <h1>
-                            Description:
-                        </h1>
-                            <p>
-                                <input value={this.state.description} onChange={e => this.handleDescriptionChange('description', e.target.value)}/>
-                            </p>
-                    </div>
-                </div>
+                    <hr className='the-line'/>
+                    <div className='right-content'>
+                        <button className="card-buttons" id='delete-button' onClick={() => {this.deleteCard(el.chapter_id)}}>X</button>
+                        <div className="content-div">
+                            <input className="the-content" name='chapter_content' type="text" value={el.chapter_content} onChange={this.onUpdate}/>
+                        </div>
+                        <div className='edit-save-cancel'>
 
-                <div className='component-cards'>
-                    <div className='prog-card' >
-                        <p>Log Entry # </p>
-                        <input value={this.state.logNum} onChange={e => this.handleChange('logNum', e.target.value)}/>
-                    </div>
-                    <div>
-                        <h1>
-                            Date: <input value={this.state.date} onChange={e => this.handleChange('date', e.target.value)}/>
-                        </h1>
-                            <p>
-                                Word Count: 
-                                <input value={this.state.inputCount} onChange={e => this.handleChange('inputCount', e.target.value)}/>
-                            </p>
+                        {   !this.state.editable
+                            ?
+                            <button className="card-buttons" id="edit-button" onClick={() => {this.editCard(el.chapter_id)}}>EDIT</button>
+                            :
+                            <button className="card-buttons" id="save-button" onClick={() => {this.saveCard(el.chapter_id)}}>SAVE</button>
+                        }
+                            <button className="card-buttons" id="cancel-button" onClick={() => {this.cancelEdit(el.chapter_id)}}>CANCEL</button>
+                        </div>
                     </div>
                 </div>
-                <div className='component-cards'>
-                    <div className='chap-card'>
-                        <p>Chapter Name: </p>
-                        <input value={this.state.description} onChange={e => this.handleDescriptionChange('description', e.target.value)}/>
-                    </div>
-                    <div>
-                        <h1>
-                            Text:
-                        </h1>
-                            <p>
-                            <input value={this.state.input} onChange={e => this.handleChapter('input', e.target.value)}/>
-                            </p>
-                    </div>
-                </div>
-            </section>
         )
     }
 }

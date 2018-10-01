@@ -23,17 +23,16 @@ module.exports = {
         .catch(err => console.log(err))
     },
 
-    updateChapter: (req, res) => {
+    saveChapters: (req, res) => {
         const db = req.app.get('db');
-        const { chap_id, description, input } = req.body;
-        console.log('update chapter ', chap_id, description, input)
+        const { chapter_id, chapter_title, chapter_content, user_id } = req.body;
+        console.log('update chapter ', chapter_id, chapter_title, chapter_content)
 
-        db.chapters.update_chapter([chap_id, description, input, req.session.user.user_id])
-        .then( (chapters) => res.status(200).send(chapters) )
-        .catch( err => {
-            res.status(500).send({errorMessage: "Could not update"});
-            console.log(err)
-        } );
+        db.chapters.edit_chapter([ chapter_id, chapter_title, chapter_content, user_id ])
+        .then(chapters => {
+            res.status(200).send(chapters)
+        })
+        .catch(err => console.log(err))
     },
 
     deleteChapter: (req, res) => {

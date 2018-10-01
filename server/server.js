@@ -84,34 +84,23 @@ app.get('/auth/callback', async (req, res) => {
 app.get('/api/getUser', auth_controller.getUser);
 app.post('/auth/logout', auth_controller.logout);
 
-app.get('/api/displayUser', auth_controller.displayUser)
+app.get('/api/displayUser', auth_controller.displayUser);
 
 // Create a card controller that checks the users location (home, chapters, etc.) and app.whatevers the method depending on that. //
 ////// Cards - for each component -
 
 // Chapter cards
-app.get('/api/getChapters', card_controller.getChapters)
+app.get('/api/getChapters', card_controller.getChapters);
+app.put('/api/saveChapters/:id', card_controller.saveChapters);
 
 // // Location cards
- app.post('/api/cards/createLoc', card_controller.createLocation);
- app.get('/api/cards/getLoc', card_controller.getLocation);
-// app.get('/api/cards/getAllLocs', card_controller.getAllLocations);
- app.put('/api/cards/updateLoc' ,card_controller.updateLocation);
- app.delete('/api/cards/deleteLoc/:id', card_controller.deleteLocation);
+ 
 
 // // Character cards
- app.post('/api/cards/createChar', card_controller.createCharacter);
- app.get('/api/cards/getChar', card_controller.getCharacter);
-// app.get('/api/cards/getAllChars', card_controller.getAllCharacters);
- app.put('/api/cards/updateChar' ,card_controller.updateCharacter);
- app.delete('/api/cards/deleteChar/:id', card_controller.deleteCharacter);
+ 
 
 // // Progress cards
- app.post('/api/cards/createProg', card_controller.createProgress);
- app.get('/api/cards/getProg', card_controller.getProgress);
-// app.get('/api/cards/getAllProgs', card_controller.getAllProgress);
- app.put('/api/cards/updateProg' ,card_controller.updateProgress);
- app.delete('/api/cards/deleteProg/:id', card_controller.deleteProgress);
+
 
 ////// Cards - for each component -
 

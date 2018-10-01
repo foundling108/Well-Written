@@ -9,6 +9,7 @@ class Chapters extends Component {
         super(props);
         
         this.state = {
+            editable: false,
             user_id: '',
             chapter_id: 0,
             chapter_title: '',
@@ -29,6 +30,32 @@ class Chapters extends Component {
             })
         })
     }
+
+    // editCard = (value) => {
+    //     console.log('1111', value)
+    //     const editable = this.state.editable;
+    //     editable[value].role 
+
+    //     this.forceUpdate();
+    // }
+
+    saveCard = () => {
+        const { user_id, chapter_id, chapter_title, chapter_content } = this.state
+
+        let stuff = { chapter_id, chapter_title, chapter_content, user_id }
+        axios.put(`/api/saveChapters/${chapter_id}`, stuff)
+        .then(res => {
+            this.setState({
+                editable: false
+            })
+        })
+    }
+
+    onUpdate = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        }) 
+    }
     
     render() {
 
@@ -39,19 +66,25 @@ class Chapters extends Component {
                         <div className="title-div">
                             <div className='id-div'>
                                 <p>Chapter</p>
-                                <input className="the-id" name='chapter_id' type="text" value={el.chapter_id} onChange={this.onSave}/>
+                                <input className="the-id" name='chapter_id' type="text" value={el.chapter_id} onChange={this.onUpdate}/>
                             </div>
-                            <input className="the-title" name='chapter_title' type="text" value={el.chapter_title} onChange={this.onSave}/>
+                            <input className="the-title" name='chapter_title' type="text" value={el.chapter_title} onChange={this.onUpdate}/>
                         </div>
                     </div>
                     <hr className='the-line'/>
                     <div className='right-content'>
                         <button className="card-buttons" id='delete-button' onClick={() => {this.deleteCard(el.chapter_id)}}>X</button>
                         <div className="content-div">
-                            <input className="the-content" name='chapter_content' type="text" value={el.chapter_content} onChange={this.onSave}/>
+                            <input className="the-content" name='chapter_content' type="text" value={el.chapter_content} onChange={this.onUpdate}/>
                         </div>
                         <div className='edit-save-cancel'>
+
+                        {   !this.state.editable
+                            ?
                             <button className="card-buttons" id="edit-button" onClick={() => {this.editCard(el.chapter_id)}}>EDIT</button>
+                            :
+                            <button className="card-buttons" id="save-button" onClick={() => {this.saveCard(el.chapter_id)}}>SAVE</button>
+                        }
                             <button className="card-buttons" id="cancel-button" onClick={() => {this.cancelEdit(el.chapter_id)}}>CANCEL</button>
                         </div>
                     </div>
@@ -75,70 +108,3 @@ class Chapters extends Component {
 }
 
 export default Chapters;
-
-// this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-// this.handleChapterChange = this.handleChapterChange.bind(this);
-// this.createCard = this.createCard.bind(this);
-// this.getCards = this.getCards.bind(this);
-// this.editCard = this.editCard.bind(this);
-// this.deleteCard = this.deleteCard.bind(this);
-
-
-    // componentDidMount() {
-    //         this.getCards();
-    // }
-
-    // getCards() {
-    //     axios.get('/api/cards/getChap')
-    //     .then(res => {
-    //         this.setState({
-    //             cardArray: res.data
-    //         })
-    //     })
-    // }
-    
-    // editCard(chap_id) {
-    //     const { description, input } = this.state
-    //     axios.put('/api/cards/updateChap', {chap_id, description, input})
-    //     .then( (res) => {
-    //         this.setState({
-    //             cardArray: res.data,
-    //             description: '',
-    //             input: ''
-    //         })
-    //     })
-    // }
-    
-    
-    // createCard() {
-    //     axios.post('/api/cards/createChap')
-    //     .then( (res) => {
-    //         this.setState({
-    //             cardArray: res.data
-    //         })
-    //     } )
-    // }
-
-    // deleteCard(id) {
-    //     console.log('id ', id)
-    //     axios.delete(`/api/cards/deleteChap/${id}`)
-    //     .then( res => this.setState({
-    //         cardArray: res.data
-    //     }) );
-    // }
-
-    // handleDescriptionChange(prop, val) {
-    //     if(val.length < 180) {
-    //         this.setState({
-    //             [prop]: val
-    //         })
-    //     }
-    // }
-
-    // handleChapterChange(prop, val) {
-    //     if(val.length < 5000) {
-    //         this.setState({
-    //             [prop]: val
-    //         })
-    //     }
-    // }
