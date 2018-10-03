@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './Chapters.css';
 
-// import Cards from './../Cards/Cards';
+import './../Cards/Cards.css'
+import Cards from './../Cards/Cards.js';
+
 
 class Chapters extends Component {
     constructor(props) {
@@ -15,12 +17,16 @@ class Chapters extends Component {
             chapter_title: '',
             chapter_content: '',
             cardsToDisplay: []
+
         }
+
+        this.saveCard = this.saveCard.bind(this);
     }
 
     componentDidMount(){
         axios.get('/api/getChapters')
         .then(res => {
+            console.log(res.data)
             this.setState({
                 cardsToDisplay: res.data,
                 user_id: res.data[0].user_id,
@@ -31,64 +37,33 @@ class Chapters extends Component {
         })
     }
 
-    // editCard = (value) => {
-    //     console.log('1111', value)
-    //     const editable = this.state.editable;
-    //     editable[value].role 
+    saveCard = (chapter_id, chapter_title, chapter_content) => {
 
-    //     this.forceUpdate();
-    // }
-
-    saveCard = () => {
-        const { user_id, chapter_id, chapter_title, chapter_content } = this.state
-
-        let stuff = { chapter_id, chapter_title, chapter_content, user_id }
+        let stuff = { chapter_id, chapter_title, chapter_content }
         axios.put(`/api/saveChapters/${chapter_id}`, stuff)
         .then(res => {
             this.setState({
-                editable: false
+                cardsToDisplay: res.data,
             })
         })
     }
 
-    onUpdate = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        }) 
+    deleteCard = (chapter_id) => {
+        axios.delete(`/api/deleteChapters/${chapter_id}`)
+        .then( res => {
+            this.componentDidMount()
+        })
     }
+
     
     render() {
-
-        const cards = this.state.cardsToDisplay.map((el, i) => {
+        const cardsMounted = this.state.cardsToDisplay.map((el, i) => {
             return(
-                <div className="the-cards" key={el + i}>
-                    <div className='left-content'>
-                        <div className="title-div">
-                            <div className='id-div'>
-                                <p>Chapter</p>
-                                <input className="the-id" name='chapter_id' type="text" value={el.chapter_id} onChange={this.onUpdate}/>
-                            </div>
-                            <input className="the-title" name='chapter_title' type="text" value={el.chapter_title} onChange={this.onUpdate}/>
-                        </div>
-                    </div>
-                    <hr className='the-line'/>
-                    <div className='right-content'>
-                        <button className="card-buttons" id='delete-button' onClick={() => {this.deleteCard(el.chapter_id)}}>X</button>
-                        <div className="content-div">
-                            <input className="the-content" name='chapter_content' type="text" value={el.chapter_content} onChange={this.onUpdate}/>
-                        </div>
-                        <div className='edit-save-cancel'>
-
-                        {   !this.state.editable
-                            ?
-                            <button className="card-buttons" id="edit-button" onClick={() => {this.editCard(el.chapter_id)}}>EDIT</button>
-                            :
-                            <button className="card-buttons" id="save-button" onClick={() => {this.saveCard(el.chapter_id)}}>SAVE</button>
-                        }
-                            <button className="card-buttons" id="cancel-button" onClick={() => {this.cancelEdit(el.chapter_id)}}>CANCEL</button>
-                        </div>
-                    </div>
-                </div>
+                <Cards key={el+i}
+                cardContent={el.chapter_content} 
+                id={el.chapter_id} 
+                cardTitle={el.chapter_title} 
+                saveCard={this.saveCard} deleteCard={this.deleteCard}/>
             )
         })
 
@@ -99,7 +74,7 @@ class Chapters extends Component {
                 Chapters  
             </div>
                 <section className='content-cards'>  
-                    {cards}
+                    {cardsMounted}
                 </section>
             <button className='addButton' onClick={this.createCard}>+</button>
         </div>

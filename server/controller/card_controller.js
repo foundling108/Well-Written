@@ -25,8 +25,8 @@ module.exports = {
 
     saveChapters: (req, res) => {
         const db = req.app.get('db');
-        const { chapter_id, chapter_title, chapter_content, user_id } = req.body;
-        console.log('update chapter ', chapter_id, chapter_title, chapter_content)
+        const { user_id } = req.session.user;
+        const { chapter_id, chapter_title, chapter_content } = req.body;
 
         db.chapters.edit_chapter([ chapter_id, chapter_title, chapter_content, user_id ])
         .then(chapters => {
@@ -35,16 +35,17 @@ module.exports = {
         .catch(err => console.log(err))
     },
 
-    deleteChapter: (req, res) => {
+    deleteChapters: (req, res) => {
         const db = req.app.get('db');
-        const { params } = req;
+        const { user_id } = req.session.user;
+        const { id } = req.params;
 
-        db.chapters.delete_chapter([params.id])
-        .then( (chapters) => res.status(200).send(chapters) )
-        .catch( err => {
-            res.status(500).send({errorMessage: "Could not delete"});
-            console.log(err)
-        } );
+
+        db.chapters.delete_chapter([user_id, id])
+        .then(deleted => {
+            res.status(200).send(deleted)
+        })
+        .catch(err => console.log(err))
     },
     
     //////////////////////// Locations ////////////////////////////

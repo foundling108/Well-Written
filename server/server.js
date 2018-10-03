@@ -92,6 +92,7 @@ app.get('/api/displayUser', auth_controller.displayUser);
 // Chapter cards
 app.get('/api/getChapters', card_controller.getChapters);
 app.put('/api/saveChapters/:id', card_controller.saveChapters);
+app.delete('/api/deleteChapters/:id', card_controller.deleteChapters)
 
 // // Location cards
  
