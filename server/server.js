@@ -50,7 +50,7 @@ massive(CONNECTION_STRING)
     }
   })
 
-app.use( express.static( `${__dirname}/../build` ) );
+app.use( express.static( `${__dirname}/../../build` ) );
 
 app.get('/auth/callback', async (req, res) => {
     let payload = {
