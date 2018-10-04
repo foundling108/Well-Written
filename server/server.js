@@ -76,7 +76,7 @@ app.get('/auth/callback', async (req, res) => {
       let createdUser = await db.users.create_user([sub, picture, given_name, family_name, isPremium]);
       req.session.user = createdUser[0]
     }
-    res.redirect('http://localhost:3000/#/home')
+    res.redirect('/#/home')
   });
 
 
