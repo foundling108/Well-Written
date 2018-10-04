@@ -8,6 +8,7 @@ class Cards extends Component {
         this.state = {
             editable: false, 
             commandEdit: '',
+            user_id: '',
             id: 0,
             cardTitle: '',
             cardContent: ''
@@ -17,6 +18,7 @@ class Cards extends Component {
     componentDidMount(){
         this.setState({
             commandEdit: this.props.cardsToDisplay,
+            user_id: this.props.user_id,
             id: this.props.id,
             cardTitle: this.props.cardTitle,
             cardContent: this.props.cardContent

@@ -11,29 +11,36 @@ class Chapters extends Component {
         super(props);
         
         this.state = {
-            editable: false,
             user_id: '',
             chapter_id: 0,
             chapter_title: '',
             chapter_content: '',
             cardsToDisplay: []
-
         }
 
         this.saveCard = this.saveCard.bind(this);
     }
 
     componentDidMount(){
+        this.mountToDisplay()
+    }
+
+    mountToDisplay = () => {
         axios.get('/api/getChapters')
         .then(res => {
-            console.log(res.data)
+            console.log('res.data', res.data)
+            if( res.data.length === 0 ){
+            this.setState({
+                cardsToDisplay: []
+            })
+            } else {
             this.setState({
                 cardsToDisplay: res.data,
                 user_id: res.data[0].user_id,
                 chapter_id: res.data[0].chapter_id,
                 chapter_title: res.data[0].chapter_title,
                 chapter_content: res.data[0].chapter_content
-            })
+            })}
         })
     }
 
@@ -51,7 +58,7 @@ class Chapters extends Component {
     deleteCard = (chapter_id) => {
         axios.delete(`/api/deleteChapters/${chapter_id}`)
         .then( res => {
-            this.componentDidMount()
+            this.mountToDisplay()
         })
     }
 
@@ -73,9 +80,17 @@ class Chapters extends Component {
             <div className="chapters-header">
                 Chapters  
             </div>
-                <section className='content-cards'>  
-                    {cardsMounted}
-                </section>
+                    {
+                        !this.state.cardsToDisplay
+                        ?
+                        <div className='nada'>
+                            <p className='nada-p'>Nothing yet</p>
+                        </div>
+                        :
+                        <section className='content-cards'> 
+                            {cardsMounted}
+                        </section>
+                    }
             <button className='addButton' onClick={this.createCard}>+</button>
         </div>
         )
