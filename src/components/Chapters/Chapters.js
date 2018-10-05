@@ -30,7 +30,6 @@ class Chapters extends Component {
     mountToDisplay = () => {
         axios.get('/api/getChapters')
         .then(res => {
-            console.log('res.data', res.data)
             if( res.data.length === 0 ){
             this.setState({
                 cardsToDisplay: []

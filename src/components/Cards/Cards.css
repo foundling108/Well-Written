@@ -36,11 +36,6 @@
   /* border: solid black 2px; */
 }
 
-.id-div p {
-  font-size: 2vw;
-  margin: 1% 1% 1% 1%;
-}
-
 .the-id{
   width: 3vw;
   font-size: 2vw;
@@ -72,8 +67,8 @@
   justify-content: space-between;
   /* border: solid gold 2px; */
 }
-/* 
-.content-div {
+
+/* .content-div {
   border: solid pink 2px;
 } */
 
@@ -112,9 +107,108 @@
 }
 
 @media (max-width: 425px) {
-  
+  .the-cards{
+    margin-bottom: 2%;
+    height: 10vh;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.25), 0 1px 1px 0 rgba(0, 0, 0, 0.26);
+  }
+
+  .the-id{
+    width: 6vw;
+    font-size: 5vw;
+    padding: 0 0 0 4px;
+  }
+
+  .the-title{
+    font-size: 3vw;
+    width: 130%;
+  }
+
+  .the-line{
+    left: 30%;
+    height: 12%;
+  }
+
+  .right-content {
+    width: 79%;
+  }
+
+  .content-div {
+    position: relative;
+    left: 15%;
+    width: 80%;
+  }
+
+  .the-content{
+    font-size: 3vw;
+  }
+
+  .card-buttons{
+    height: 4vw;
+    font-size: 3vw;
+  }
+
+  .edit-save-cancel{
+    display: flex;
+    right: -45%;
+    bottom: 5%;
+  }
+
+  #delete-button{
+    left: 88%;
+  }
 }
 
 @media (max-width: 786px) {
+  .the-cards{
+    margin-bottom: 2%;
+    height: 12vh;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.25), 0 1px 1px 0 rgba(0, 0, 0, 0.26);
+  }
 
+  .the-id{
+    width: 6vw;
+    font-size: 5vw;
+    padding: 0 0 0 4px;
+  }
+
+  .the-title{
+    font-size: 3vw;
+    width: 130%;
+  }
+
+  .the-line{
+    left: 30%;
+    height: 16%;
+  }
+
+  .right-content {
+    width: 79%;
+  }
+
+  .content-div {
+    position: relative;
+    left: 15%;
+    width: 80%;
+  }
+
+  .the-content{
+    font-size: 3vw;
+  }
+
+  .card-buttons{
+    height: 4vw;
+    font-size: 3vw;
+  }
+
+  .edit-save-cancel{
+    display: flex;
+    right: -59%;
+    bottom: 5%;
+  }
+
+  #delete-button{
+    margin-top: 1%;
+    left: 92%;
+  }
 }
