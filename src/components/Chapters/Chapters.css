@@ -35,6 +35,7 @@ input:focus {
 
 .nada {
   position: relative;
-  left: 20%;
+  left: 45%;
   top: 50%;
+  font-size: 5vh;
 }

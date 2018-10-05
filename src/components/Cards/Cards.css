@@ -8,7 +8,7 @@
   flex-direction: column;
   align-content: flex-start;
   overflow: scroll;
-  border: solid seagreen 2px;
+  /* border: solid seagreen 2px; */
 }
 
 .the-cards {
@@ -42,7 +42,7 @@
 }
 
 .the-id{
-  width: 2vw;
+  width: 3vw;
   font-size: 2vw;
   padding: 0 0 0 2%;
 }

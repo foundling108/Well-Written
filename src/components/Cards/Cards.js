@@ -43,7 +43,7 @@ class Cards extends Component {
     }
 
     deleteButton = () => {
-        this.props.deleteCard(this.props.i)
+        this.props.deleteCard(this.state.id)
     }
 
     handleEditChange = (e) => {
@@ -74,7 +74,7 @@ class Cards extends Component {
                     </div>
                     <hr className='the-line'/>
                     <div className='right-content'>
-                        <button className="card-buttons" id='delete-button' onClick={() => {this.props.deleteCard(this.props.id)}}>X</button>
+                        <button className="card-buttons" id='delete-button' onClick={() => {this.deleteButton()}}>X</button>
                         <div className="content-div">
                             <input className="the-content" name='cardContent' type="text" value={this.state.cardContent} onChange={this.onUpdate}/>
                         </div>

@@ -15,7 +15,6 @@ module.exports = {
     getChapters: (req, res) => {
         const db = req.app.get('db');
         const { user_id } = req.session.user;
-        console.log('1111', user_id)
         
         db.chapters.read_chapter([user_id])
         .then(chapters => {

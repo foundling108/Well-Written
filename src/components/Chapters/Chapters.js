@@ -19,6 +19,8 @@ class Chapters extends Component {
         }
 
         this.saveCard = this.saveCard.bind(this);
+        this.mountToDisplay = this.mountToDisplay.bind(this);
+        this.cardsMounted = this.cardsMounted.bind(this);
     }
 
     componentDidMount(){
@@ -40,7 +42,7 @@ class Chapters extends Component {
                 chapter_id: res.data[0].chapter_id,
                 chapter_title: res.data[0].chapter_title,
                 chapter_content: res.data[0].chapter_content
-            })}
+            }, this.cardsMounted )}
         })
     }
 
@@ -56,43 +58,46 @@ class Chapters extends Component {
     }
 
     deleteCard = (chapter_id) => {
+        console.log('Delete:', chapter_id)
         axios.delete(`/api/deleteChapters/${chapter_id}`)
         .then( res => {
+            console.log(res.data)
             this.mountToDisplay()
         })
     }
 
-    
-    render() {
-        const cardsMounted = this.state.cardsToDisplay.map((el, i) => {
+    cardsMounted() {
+       return this.state.cardsToDisplay.map((el, i) => {
             return(
-                <Cards key={el+i}
+                <Cards key={el.chapter_id}
                 cardContent={el.chapter_content} 
                 id={el.chapter_id} 
                 cardTitle={el.chapter_title} 
                 saveCard={this.saveCard} deleteCard={this.deleteCard}/>
             )
         })
+    }
 
+    
+    render() {
         return(
-
-        <div className="chapters-body">
-            <div className="chapters-header">
-                Chapters  
+            <div className="chapters-body">
+                <div className="chapters-header">
+                    Chapters  
+                </div>
+                        {
+                            !this.state.cardsToDisplay.length
+                            ?
+                            <div className='nada'>
+                                <p className='nada-p'>Nothing yet</p>
+                            </div>
+                            :
+                            <section className='content-cards'> 
+                                {this.cardsMounted()}
+                            </section>
+                        }
+                <button className='addButton' onClick={this.createCard}>+</button>
             </div>
-                    {
-                        !this.state.cardsToDisplay
-                        ?
-                        <div className='nada'>
-                            <p className='nada-p'>Nothing yet</p>
-                        </div>
-                        :
-                        <section className='content-cards'> 
-                            {cardsMounted}
-                        </section>
-                    }
-            <button className='addButton' onClick={this.createCard}>+</button>
-        </div>
         )
     }
 }
