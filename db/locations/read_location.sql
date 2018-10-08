@@ -1,3 +1,4 @@
 SELECT *
 FROM locations
-WHERE author_id = $1;
+WHERE user_id = $1
+ORDER BY location_id;

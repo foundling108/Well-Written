@@ -2,86 +2,79 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './Progress.css';
 
-// import Cards from './../Cards/Cards';
+import './../Cards/Cards.css'
+import Cards from './../Cards/Cards.js'
 
 class Progress extends Component {
     constructor(props) {
         super(props);
-
+        
         this.state = {
-            cardArray: [],
-            logNum: 0,
-            date: '',
-            word_count: 0
+            user_id: '',
+            progress_id: 0,
+            entry_date: '',
+            word_count: '',
+            cardsToDisplay: []
         }
 
-        this.handleDateChange = this.handleDateChange.bind(this);
-        this.handleCountChange = this.handleCountChange.bind(this);
-        this.createCard = this.createCard.bind(this);
-        this.getCards = this.getCards.bind(this);
-        this.editCard = this.editCard.bind(this);
-        this.deleteCard = this.deleteCard.bind(this);
+        this.saveCard = this.saveCard.bind(this);
+        this.mountToDisplay = this.mountToDisplay.bind(this);
+        this.cardsMounted = this.cardsMounted.bind(this);
     }
 
-    // componentDidMount() {
-    //     this.getCards();
-    // }
+    componentDidMount(){
+        this.mountToDisplay()
+    }
 
-    getCards() {
-        console.log('get cards')
-        axios.get('/api/cards/getProg')
+    mountToDisplay = () => {
+        axios.get('/api/getProgress')
+        .then(res => {
+            if( res.data.length === 0 ){
+            this.setState({
+                cardsToDisplay: []
+            })
+            } else {
+            this.setState({
+                cardsToDisplay: res.data,
+                user_id: res.data[0].user_id,
+                progress_id: res.data[0].progress_id,
+                entry_date: res.data[0].entry_date,
+                word_count: res.data[0].word_count
+            }, this.cardsMounted )}
+        })
+    }
+
+    saveCard = (progress_id, entry_date, word_count) => {
+
+        let stuff = { progress_id, entry_date, word_count }
+        axios.put(`/api/saveProgress/${progress_id}`, stuff)
         .then(res => {
             this.setState({
-                cardArray: res.data
+                cardsToDisplay: res.data,
             })
         })
     }
 
-    editCard(log_id) {
-        const { logNum, word_count, date } = this.state
-        axios.put('/api/cards/updateProg', {log_id, logNum, word_count, date})
-        .then( (res) => [
-            this.setState({
-                cardArray: res.data,
-                date: '',
-                word_count: ''
-            })
-        ])
+    deleteCard = (progress_id) => {
+        console.log('Delete:', progress_id)
+        axios.delete(`/api/deleteProgress/${progress_id}`)
+        .then( res => {
+            console.log(res.data)
+            this.mountToDisplay()
+        })
     }
 
-    createCard() {
-        axios.post('/api/cards/createProg')
-        .then( (res) => {
-            this.setState({
-                cardArray: res.data
-            })
-        } )
+    cardsMounted() {
+       return this.state.cardsToDisplay.map((el, i) => {
+            return(
+                <Cards key={el.progress_id}
+                cardContent={el.word_count} 
+                id={el.progress_id} 
+                cardTitle={el.entry_date} 
+                saveCard={this.saveCard} deleteCard={this.deleteCard}/>
+            )
+        })
     }
-
-    deleteCard(id) {
-        console.log('id ', id)
-        axios.delete(`/api/cards/deleteProg/${id}`)
-        .then( res => this.setState({
-            cardArray: res.data
-        }) );
-    }
-
-    handleDateChange(prop, val) {
-        if(val.length < 20) {
-            this.setState({
-                [prop]: val
-            })
-        }
-    }
-
-    handleCountChange(prop, val) {
-        if(val.length < 20) {
-            this.setState({
-                [prop]: val
-            })
-        }
-    }
-
 
     render() {
         return(
@@ -90,13 +83,17 @@ class Progress extends Component {
             <div className="progress-header">
                 Writing Progress  
             </div>
-                
-                <section className='cards'>
-                   
-
-                    
+            {
+                !this.state.cardsToDisplay.length
+                ?
+                <div className='nada'>
+                    <p className='nada-p'>Nothing yet</p>
+                </div>
+                :
+                <section className='content-cards'> 
+                    {this.cardsMounted()}
                 </section>
-
+            }
             <button className='addButton' onClick={this.createCard}>+</button>
         </div>
         )

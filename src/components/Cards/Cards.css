@@ -198,12 +198,12 @@
 
   .card-buttons{
     height: 4vw;
-    font-size: 3vw;
+    font-size: 2vw;
   }
 
   .edit-save-cancel{
     display: flex;
-    right: -59%;
+    right: -69%;
     bottom: 5%;
   }
 

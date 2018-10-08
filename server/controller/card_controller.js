@@ -62,46 +62,41 @@ module.exports = {
         } );
     },
 
-    getAllLocations: (req, res) => {
+   
+    getLocations: (req, res) => {
         const db = req.app.get('db');
-
-        db.locations.get_locations([req.session.user.id])
-    },
-
-    getLocation: (req, res) => {
-        const db = req.app.get('db');
+        const { user_id } = req.session.user;
         
-         
-        db.locations.read_location([req.session.user.user_id])
-        .then( ( locations ) => res.status(200).send( locations ))
-        .catch( err => {
-            res.status(500).send({errorMessage: "Could not get locations"});
-            console.log(err)
-        } );
+        db.locations.read_location([user_id])
+        .then(Locations => {
+            res.status(200).send(Locations)
+        })
+        .catch(err => console.log(err))
     },
 
-    updateLocation: (req, res) => {
+    saveLocations: (req, res) => {
         const db = req.app.get('db');
-        const { loc_id, name, description } = req.body;
+        const { user_id } = req.session.user;
+        const { location_id, location_name, location_description } = req.body;
 
-        db.locations.update_location([loc_id, name, description, req.session.user.user_id])
-        .then( (locations) => res.status(200).send(locations) )
-        .catch( err => {
-            res.status(500).send({errorMessage: "Could not update"});
-            console.log(err)
-        } );
+        db.locations.edit_location([ location_id, location_name, location_description, user_id ])
+        .then(Locations => {
+            res.status(200).send(Locations)
+        })
+        .catch(err => console.log(err))
     },
 
-    deleteLocation: (req, res) => {
+    deleteLocations: (req, res) => {
         const db = req.app.get('db');
-        const { params } = req;
+        const { user_id } = req.session.user;
+        const { id } = req.params;
 
-        db.locations.delete_location([params.id])
-        .then( (locations) => res.status(200).send(locations) )
-        .catch( err => {
-            res.status(500).send({errorMessage: "Could not delete"});
-            console.log(err)
-        } );
+
+        db.locations.delete_location([user_id, id])
+        .then(deleted => {
+            res.status(200).send(deleted)
+        })
+        .catch(err => console.log(err))
     },
 
     ///////////////////// Characters ///////////////////////////
@@ -118,46 +113,41 @@ module.exports = {
         } );
     },
 
-    getAllCharacters: (req, res) => {
+    
+    getCharacters: (req, res) => {
         const db = req.app.get('db');
-
-        db.characters.get_characters([req.session.user.id])
-    },
-
-    getCharacter: (req, res) => {
-        const db = req.app.get('db');
+        const { user_id } = req.session.user;
         
-         
-        db.characters.read_character([req.session.user.user_id])
-        .then( ( characters ) => res.status(200).send( characters ))
-        .catch( err => {
-            res.status(500).send({errorMessage: "Could not get characters"});
-            console.log(err)
-        } );
+        db.characters.read_character([user_id])
+        .then(characters => {
+            res.status(200).send(characters)
+        })
+        .catch(err => console.log(err))
     },
 
-    updateCharacter: (req, res) => {
+    saveCharacters: (req, res) => {
         const db = req.app.get('db');
-        const { char_id, name, description } = req.body;
+        const { user_id } = req.session.user;
+        const { character_id, character_name, character_description } = req.body;
 
-        db.characters.update_character([char_id, name, description, req.session.user.user_id])
-        .then( (characters) => res.status(200).send(characters) )
-        .catch( err => {
-            res.status(500).send({errorMessage: "Could not update"});
-            console.log(err)
-        } );
+        db.characters.edit_character([ character_id, character_name, character_description, user_id ])
+        .then(characters => {
+            res.status(200).send(characters)
+        })
+        .catch(err => console.log(err))
     },
 
-    deleteCharacter: (req, res) => {
+    deleteCharacters: (req, res) => {
         const db = req.app.get('db');
-        const { params } = req;
+        const { user_id } = req.session.user;
+        const { id } = req.params;
 
-        db.characters.delete_character([params.id])
-        .then( (characters) => res.status(200).send(characters) )
-        .catch( err => {
-            res.status(500).send({errorMessage: "Could not delete"});
-            console.log(err)
-        } );
+
+        db.characters.delete_character([user_id, id])
+        .then(deleted => {
+            res.status(200).send(deleted)
+        })
+        .catch(err => console.log(err))
     },
 
     ////////////////////// Progress /////////////////////////////
@@ -174,45 +164,40 @@ module.exports = {
         } );
     },
 
-    getAllProgress: (req, res) => {
-        const db = req.app.get('db');
-
-        db.progress.get_progress([req.session.user.id])
-    },
-
+    
     getProgress: (req, res) => {
         const db = req.app.get('db');
+        const { user_id } = req.session.user;
         
-         
-        db.progress.read_progress([req.session.user.user_id])
-        .then( ( progress ) => res.status(200).send( progress ))
-        .catch( err => {
-            res.status(500).send({errorMessage: "Could not get progress"});
-            console.log(err)
-        } );
+        db.progress.read_progress([user_id])
+        .then(progress => {
+            res.status(200).send(progress)
+        })
+        .catch(err => console.log(err))
     },
 
-    updateProgress: (req, res) => {
+    saveProgress: (req, res) => {
         const db = req.app.get('db');
-        const { log_id, word_count, date } = req.body;
+        const { user_id } = req.session.user;
+        const { progress_id, entry_date, word_count } = req.body;
 
-        db.progress.update_progress([log_id, word_count, date, req.session.user.user_id])
-        .then( (progress) => res.status(200).send(progress) )
-        .catch( err => {
-            res.status(500).send({errorMessage: "Could not update"});
-            console.log(err)
-        } );
+        db.progress.edit_progress([ progress_id, entry_date, word_count, user_id ])
+        .then(progress => {
+            res.status(200).send(progress)
+        })
+        .catch(err => console.log(err))
     },
 
     deleteProgress: (req, res) => {
         const db = req.app.get('db');
-        const { params } = req;
+        const { user_id } = req.session.user;
+        const { id } = req.params;
 
-        db.progress.delete_progress([params.id])
-        .then( (progress) => res.status(200).send(progress) )
-        .catch( err => {
-            res.status(500).send({errorMessage: "Could not delete"});
-            console.log(err)
-        } );
+
+        db.progress.delete_progress([user_id, id])
+        .then(deleted => {
+            res.status(200).send(deleted)
+        })
+        .catch(err => console.log(err))
     }
 }

@@ -2,99 +2,97 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './Characters.css';
 
-// import Cards from './../Cards/Cards';
+import './../Cards/Cards.css'
+import Cards from './../Cards/Cards.js'
 
 class Characters extends Component {
     constructor(props) {
         super(props);
-
+        
         this.state = {
-            cardArray: [],
-            name: '',
-            description: ''
+            user_id: '',
+            character_id: 0,
+            character_name: '',
+            character_description: '',
+            cardsToDisplay: []
         }
 
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-        this.createCard = this.createCard.bind(this);
-        this.getCards = this.getCards.bind(this);
-        this.editCard = this.editCard.bind(this);
-        this.deleteCard = this.deleteCard.bind(this);
+        this.saveCard = this.saveCard.bind(this);
+        this.mountToDisplay = this.mountToDisplay.bind(this);
+        this.cardsMounted = this.cardsMounted.bind(this);
     }
 
-    // componentDidMount() {
-    //     this.getCards();
-    // }
+    componentDidMount(){
+        this.mountToDisplay()
+    }
 
-    getCards() {
-        axios.get('/api/cards/getChar')
+    mountToDisplay = () => {
+        axios.get('/api/getCharacters')
+        .then(res => {
+            if( res.data.length === 0 ){
+            this.setState({
+                cardsToDisplay: []
+            })
+            } else {
+            this.setState({
+                cardsToDisplay: res.data,
+                user_id: res.data[0].user_id,
+                character_id: res.data[0].character_id,
+                character_name: res.data[0].character_name,
+                character_description: res.data[0].character_description
+            }, this.cardsMounted )}
+        })
+    }
+
+    saveCard = (character_id, character_name, character_description) => {
+
+        let stuff = { character_id, character_name, character_description }
+        axios.put(`/api/saveCharacters/${character_id}`, stuff)
         .then(res => {
             this.setState({
-                cardArray: res.data
+                cardsToDisplay: res.data,
             })
         })
     }
 
-    createCard() {
-        axios.post('/api/cards/createChar')
-        .then( (res) => {
-            this.setState({
-                cardArray: res.data
-            })
-        } )
-    }
-
-    editCard(char_id) {
-        const { name, description } = this.state
-        axios.put('/api/cards/updateChar', {char_id, name, description})
-        .then( (res) => {
-            this.setState({
-                cardArray: res.data,
-                name: '',
-                description: ''
-            })
+    deleteCard = (character_id) => {
+        console.log('Delete:', character_id)
+        axios.delete(`/api/deleteCharacters/${character_id}`)
+        .then( res => {
+            console.log(res.data)
+            this.mountToDisplay()
         })
     }
 
-    deleteCard(id) {
-        console.log('id ', id)
-        axios.delete(`/api/cards/deleteChar/${id}`)
-        .then( res => this.setState({
-            cardArray: res.data
-        }) );
-    }
-
-
-    handleNameChange(prop, val) {
-        if(val.length < 80) {
-            this.setState({
-                [prop]: val
-            })
-        }
-    }
-
-    handleDescriptionChange(prop, val) {
-        if(val.length < 180) {
-            this.setState({
-                [prop]: val
-            })
-        }
+    cardsMounted() {
+       return this.state.cardsToDisplay.map((el, i) => {
+            return(
+                <Cards key={el.character_id}
+                cardContent={el.character_description} 
+                id={el.character_id} 
+                cardTitle={el.character_name} 
+                saveCard={this.saveCard} deleteCard={this.deleteCard}/>
+            )
+        })
     }
 
     render() {
         return(
-
-            <div className="characters-body">
+        <div className="characters-body">
             <div className="characters-header">
                 Characters  
             </div>
-
-                <section className='cards'>
-
-
-                    
+            {
+                !this.state.cardsToDisplay.length
+                ?
+                <div className='nada'>
+                    <p className='nada-p'>Nothing yet</p>
+                </div>
+                :
+                <section className='content-cards'> 
+                    {this.cardsMounted()}
                 </section>
-
+            }
             <button className='addButton' onClick={this.createCard}>+</button>
         </div>
         )

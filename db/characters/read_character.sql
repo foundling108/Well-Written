@@ -1,3 +1,4 @@
 SELECT *
 FROM characters
-WHERE author_id = $1;
+WHERE user_id = $1
+ORDER BY character_id;

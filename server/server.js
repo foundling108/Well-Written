@@ -93,16 +93,22 @@ app.get('/api/displayUser', auth_controller.displayUser);
 // Chapter cards
 app.get('/api/getChapters', card_controller.getChapters);
 app.put('/api/saveChapters/:id', card_controller.saveChapters);
-app.delete('/api/deleteChapters/:id', card_controller.deleteChapters)
+app.delete('/api/deleteChapters/:id', card_controller.deleteChapters);
 
 // // Location cards
- 
+app.get('/api/getLocations', card_controller.getLocations);
+app.put('/api/saveLocations/:id', card_controller.saveLocations);
+app.delete('/api/deleteLocations/:id', card_controller.deleteLocations);
 
 // // Character cards
- 
+app.get('/api/getCharacters', card_controller.getCharacters);
+app.put('/api/saveCharacters/:id', card_controller.saveCharacters);
+app.delete('/api/deleteCharacters/:id', card_controller.deleteCharacters);
 
 // // Progress cards
-
+app.get('/api/getProgress', card_controller.getProgress);
+app.put('/api/saveProgress/:id', card_controller.saveProgress);
+app.delete('/api/deleteProgress/:id', card_controller.deleteProgress);
 
 ////// Cards - for each component -
 

@@ -2,85 +2,79 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './Locations.css';
 
-// import Cards from './../Cards/Cards';
+import './../Cards/Cards.css'
+import Cards from './../Cards/Cards.js'
 
 class Locations extends Component {
     constructor(props) {
         super(props);
-
+        
         this.state = {
-            cardArray: [],
-            name: '',
-            description: ''
+            user_id: '',
+            location_id: 0,
+            location_name: '',
+            location_description: '',
+            cardsToDisplay: []
         }
 
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-        this.createCard = this.createCard.bind(this);
-        this.getCards = this.getCards.bind(this);
-        this.editCard = this.editCard.bind(this);
-        this.deleteCard = this.deleteCard.bind(this);
+        this.saveCard = this.saveCard.bind(this);
+        this.mountToDisplay = this.mountToDisplay.bind(this);
+        this.cardsMounted = this.cardsMounted.bind(this);
     }
 
-    // componentDidMount() {
-    //     this.getCards();
-    // }
+    componentDidMount(){
+        this.mountToDisplay()
+    }
 
-    getCards() {
-        console.log('get cards')
-        axios.get('/api/cards/getloc')
+    mountToDisplay = () => {
+        axios.get('/api/getLocations')
+        .then(res => {
+            if( res.data.length === 0 ){
+            this.setState({
+                cardsToDisplay: []
+            })
+            } else {
+            this.setState({
+                cardsToDisplay: res.data,
+                user_id: res.data[0].user_id,
+                location_id: res.data[0].location_id,
+                location_name: res.data[0].location_name,
+                location_description: res.data[0].location_description
+            }, this.cardsMounted )}
+        })
+    }
+
+    saveCard = (location_id, location_name, location_description) => {
+
+        let stuff = { location_id, location_name, location_description }
+        axios.put(`/api/saveLocations/${location_id}`, stuff)
         .then(res => {
             this.setState({
-                cardArray: res.data
+                cardsToDisplay: res.data,
             })
         })
     }
 
-    createCard() {
-        axios.post('/api/cards/createLoc')
-        .then( (res) => {
-            this.setState({
-                cardArray: res.data
-            })
-        } )
-    }
-
-    editCard(loc_id) {
-        const { name, description } = this.state
-        axios.put('/api/cards/updateLoc', {loc_id, name, description})
-        .then( (res) => {
-            this.setState({
-                cardArray: res.data,
-                name: '',
-                description: ''
-            })
+    deleteCard = (location_id) => {
+        console.log('Delete:', location_id)
+        axios.delete(`/api/deleteLocations/${location_id}`)
+        .then( res => {
+            console.log(res.data)
+            this.mountToDisplay()
         })
     }
 
-    deleteCard(id) {
-        console.log('id ', id)
-        axios.delete(`/api/cards/deleteLoc/${id}`)
-        .then( res => this.setState({
-            cardArray: res.data
-        }) );
+    cardsMounted() {
+       return this.state.cardsToDisplay.map((el, i) => {
+            return(
+                <Cards key={el.location_id}
+                cardContent={el.location_description} 
+                id={el.location_id} 
+                cardTitle={el.location_name} 
+                saveCard={this.saveCard} deleteCard={this.deleteCard}/>
+            )
+        })
     }
-
-    handleNameChange(prop, val) {
-        if(val.length < 80) {
-            this.setState({
-                [prop]: val
-            })
-        }
-    }
-
-    handleDescriptionChange(prop, val) {
-        if(val.length < 180) {
-            this.setState({
-                [prop]: val
-            })
-        }
-    }
-
 
     render() {
         return(
@@ -89,13 +83,17 @@ class Locations extends Component {
             <div className="location-header">
                 Locations
             </div>  
-
-                <section className='cards'>
-                  
-
-                    
+            {
+                !this.state.cardsToDisplay.length
+                ?
+                <div className='nada'>
+                    <p className='nada-p'>Nothing yet</p>
+                </div>
+                :
+                <section className='content-cards'> 
+                    {this.cardsMounted()}
                 </section>
-
+            }
             <button className='addButton' onClick={this.createCard}>+</button>
         </div>
         )
