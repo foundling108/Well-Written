@@ -82,6 +82,3 @@ class Nav extends Component {
 }
 
     export default withRouter(Nav);
-
-    // import { logout } from './../../dux/reducer';
-    // import { connect } from 'react-redux';
