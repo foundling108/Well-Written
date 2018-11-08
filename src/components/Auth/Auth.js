@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-// import Blur from 'react-blur';
+import Blur from 'react-blur';
 import './Auth.css';
 
 class Auth extends Component {
@@ -33,12 +33,14 @@ class Auth extends Component {
     render() {
         return(
             <section>
+                <Blur className="Body" id='body' img={this.state.img} blurRadius={200}>
                     <div className="Header-Auth" id="Auth">
                         <h1 className='auth-title'>idigyo / Words</h1>
                         <div className="button-box">
                             <button id="darkbuttons" onClick={this.login}> Login </button>
                         </div>
                     </div>
+                </Blur>
             </section>
         )
     }
